@@ -3,11 +3,11 @@ package com.example.ecommerce
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.ecommerce.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
         }
         val btnMoveActivity: Button = findViewById(R.id.btn1)
         btnMoveActivity.setOnClickListener {
-            val moveIntent = Intent(this@MainActivity, LoginActivity::class.java)
+            val moveIntent = Intent(this@MainActivity, WelcomeActivity::class.java)
             startActivity(moveIntent)
         }
+
 
 
 
