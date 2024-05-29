@@ -6,4 +6,5 @@
     <string name="description">Organic lemons are citrus fruits grown without the use of synthetic pesticides, fertilizers, or genetically modified organisms (GMOs). They are cultivated using organic farming methods that prioritize soil health, biodiversity, and ecological balance. More</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="detail_image_content_description">detail image</string>
 </resources>
