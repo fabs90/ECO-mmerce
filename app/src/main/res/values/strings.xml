@@ -3,8 +3,16 @@
     <string name="login">Login</string>
     <string name="create_an_account">Create an account</string>
     <string name="already_have_an_account">Already have an account?</string>
-    <string name="description">Organic lemons are citrus fruits grown without the use of synthetic pesticides, fertilizers, or genetically modified organisms (GMOs). They are cultivated using organic farming methods that prioritize soil health, biodiversity, and ecological balance. More</string>
+   <string name="description">Organic lemons are citrus fruits grown without the use of synthetic pesticides, fertilizers, or genetically modified organisms (GMOs). They are cultivated using organic farming methods that prioritize soil health, biodiversity, and ecological balance. More</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="detail_image_content_description">detail image</string>
+   <string name="item_image">Item Image</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="increase_quantity">Tambah Jumlah</string>
+    <string name="decrease_quantity">Kurangi Jumlah</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="shipping_charge">Shipping Charge</string>
+    <string name="total">Total</string>
 </resources>
+
