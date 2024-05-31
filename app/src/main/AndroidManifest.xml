@@ -12,27 +12,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECOmmerce"
         tools:targetApi="31">
+
         <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="false" />
-        <activity android:name=".LoginActivity"
             android:exported="false"
             />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".DetailActivity" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
