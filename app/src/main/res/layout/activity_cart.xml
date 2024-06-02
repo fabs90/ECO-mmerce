@@ -74,6 +74,15 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="192dp" />
 
+        <TextView
+            android:id="@+id/total_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Total Price"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="147dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- TextView to display the total price -->
