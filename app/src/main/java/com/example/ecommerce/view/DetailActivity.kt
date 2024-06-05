@@ -1,33 +1,21 @@
-package com.example.ecommerce
+package com.example.ecommerce.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.ecommerce.databinding.ActivityWelcomeBinding
+import com.example.ecommerce.R
 
-class WelcomeActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityWelcomeBinding
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_welcome)
+        setContentView(R.layout.activity_detail)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-
-        binding.button.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
-
-        val textHyperLink : TextView = findViewById(R.id.loginHyperLink)
-        textHyperLink.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 }

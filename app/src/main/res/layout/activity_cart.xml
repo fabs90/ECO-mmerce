@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
+    tools:context=".view.CartActivity">
 
     <!-- RecyclerView to display the list of items in the cart -->
     <androidx.recyclerview.widget.RecyclerView
