@@ -9,6 +9,8 @@
     tools:context=".CartActivity">
 
     <!-- RecyclerView to display the list of items in the cart -->
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCart"
         android:layout_width="0dp"
@@ -16,10 +18,11 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_cart" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -56,7 +59,7 @@
             tools:layout_editor_absoluteY="83dp" />
 
         <TextView
-            android:id="@+id/textViewTotal"
+            android:id="@+id/textViewTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/total"

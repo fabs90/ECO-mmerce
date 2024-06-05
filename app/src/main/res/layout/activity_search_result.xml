@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SearchResultActivity">
 
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchBar"
@@ -19,33 +19,19 @@
         app:layout_constraintTop_toTopOf="parent">
     </com.google.android.material.search.SearchBar>
 
-    <ImageView
-        android:id="@+id/headerImageView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSearch"
         android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Header Image"
-        android:src="@drawable/img_register"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_margin="16dp"
-        android:scaleType="centerCrop"/>
-
-
-    <GridView
-        android:id="@+id/gridProduct"
-        android:layout_width="0dp"
-        android:layout_height="360dp"
-        android:layout_marginBottom="16dp"
-        android:horizontalSpacing="6dp"
-        android:numColumns="2"
-        android:verticalSpacing="20dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints"
-        tools:listitem="@layout/item_product"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_search" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -69,6 +55,7 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
