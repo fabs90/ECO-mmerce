@@ -2,6 +2,7 @@
     <string name="app_name">ECOmmerce</string>
     <string name="login">Login</string>
     <string name="create_an_account">Create an account</string>
+    <string name="continue_with_google">Continue with Google</string>
     <string name="already_have_an_account">Already have an account?</string>
    <string name="description">Organic lemons are citrus fruits grown without the use of synthetic pesticides, fertilizers, or genetically modified organisms (GMOs). They are cultivated using organic farming methods that prioritize soil health, biodiversity, and ecological balance. More</string>
     <string name="plus">+</string>
@@ -15,5 +16,6 @@
     <string name="shipping_charge">Shipping Charge</string>
     <string name="searchbar_hint">Search your product</string>
     <string name="total">Total</string>
+    <string name="welcome_text_description">Your one-stop shop for eco-friendly products!</string>
 </resources>
 

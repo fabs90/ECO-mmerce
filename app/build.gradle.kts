@@ -41,7 +41,6 @@ android {
 
 dependencies {
 
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -52,8 +51,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+    
     implementation ("com.google.android.material:material:1.6.0")
-
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.etebarian:meow-bottom-navigation:1.3.1")
+
 }
