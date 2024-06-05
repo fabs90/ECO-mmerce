@@ -4,5 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green_main">#39B54A</color>
     <color name="white_main">#F4F5F9</color>
+<<<<<<< HEAD
     <color name="fab_ic_color">#FF999C99</color>
+=======
+    <color name="white_secondary">#FBFDF3</color>">\
+>>>>>>> e3a60b960b9488ce8a3a300f5830ed0e1915b28a
 </resources>
