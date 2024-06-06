@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "292189679330",
+    "project_id": "eco-mmerce-cloud",
+    "storage_bucket": "eco-mmerce-cloud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292189679330:android:ebf0c4ab75948ddeb738bb",
+        "android_client_info": {
+          "package_name": "com.ecommerce.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292189679330-4j3hsf621eeh0o6v3ighmi908fnqv5gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeMz2w9TjSElfRE7IV1uMLfdyw4JW9Wbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292189679330-4j3hsf621eeh0o6v3ighmi908fnqv5gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292189679330:android:cfe3cd392cfb7d33b738bb",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292189679330-4j3hsf621eeh0o6v3ighmi908fnqv5gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeMz2w9TjSElfRE7IV1uMLfdyw4JW9Wbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292189679330-4j3hsf621eeh0o6v3ighmi908fnqv5gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
