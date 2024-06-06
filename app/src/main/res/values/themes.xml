@@ -6,11 +6,11 @@
     </style>
 
     <style name="Theme.ECOmmerce" parent="Base.Theme.ECOmmerce" />
-<<<<<<< HEAD
+
     <style name="ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
-=======
+    </style>
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
