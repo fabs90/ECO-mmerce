@@ -1,11 +1,9 @@
 const express = require('express');
-const { createData, getData, updateData, deleteData } = require('../controllers/dataController');
+const { getData } = require('../controllers/dataController');
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post('/data', createData);
-router.get('/data/:userId', getData);
-router.put('/data/:dataId', updateData);
-router.delete('/data/:dataId', deleteData);
+router.get('/data', authenticateToken, getData);
 
 module.exports = router;

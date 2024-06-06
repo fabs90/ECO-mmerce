@@ -115,4 +115,44 @@ const logout = async (req, res) => {
     }
 };
 
-module.exports = { register, login, logout };
+const googleAuth = async (req, res) => {
+    const { idToken } = req.body;
+
+    try {
+        // Verify the ID token using Firebase Admin SDK
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        const { email, name, picture, uid } = decodedToken;
+
+        // Check if user exists in Firestore
+        const userRef = admin.firestore().collection('users').doc(uid);
+        const doc = await userRef.get();
+
+        if (!doc.exists) {
+            // If user does not exist, create a new user
+            await userRef.set({
+                email,
+                name,
+                picture,
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
+            });
+        }
+
+        // Generate your own JWT token if needed
+        const token = jwt.sign({ uid, email }, 'your_jwt_secret', { expiresIn: '1h' });
+
+        return res.status(200).json({
+            status: "successful",
+            message: "User signed in successfully",
+            token
+        });
+    } catch (error) {
+        console.error('Error verifying ID token:', error);
+        return res.status(500).json({
+            status: "error",
+            message: "Internal Server Error"
+        });
+    }
+};
+
+
+module.exports = { register, login, logout, googleAuth };
