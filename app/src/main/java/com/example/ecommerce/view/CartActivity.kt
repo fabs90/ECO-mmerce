@@ -1,4 +1,4 @@
-package com.example.ecommerce
+package com.example.ecommerce.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ecommerce.R
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.NumberFormat
 import java.util.Locale
@@ -31,8 +29,9 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+
+
         recyclerView = findViewById(R.id.recyclerViewCart)
-        totalPriceTextView = findViewById(R.id.textViewTotalPrice)
 
         cartAdapter = CartAdapter(cartItems, ::updateTotalPrice)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -44,7 +43,7 @@ class CartActivity : AppCompatActivity() {
     private fun updateTotalPrice() {
         val totalPrice = cartItems.sumOf { it.price * it.quantity }
         val formatRupiah = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
-        totalPriceTextView.text = getString(R.string.total_price, formatRupiah.format(totalPrice))
+//        totalPriceTextView.text = getString(R.string.total_price, formatRupiah.format(totalPrice))
     }
 }
 
