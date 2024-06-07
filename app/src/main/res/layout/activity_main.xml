@@ -67,6 +67,7 @@
         app:backgroundTint="@color/green_main"
         app:tint="@color/white"
         app:fabSize="normal"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent" />
 

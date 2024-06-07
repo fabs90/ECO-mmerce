@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECOmmerce"
         tools:targetApi="31">
-     
+        <activity
+            android:name=".view.ProfileActivity"
+            android:exported="false" />
          <activity
             android:name=".view.SearchResultActivity"
             android:exported="false" />
@@ -31,8 +33,7 @@
         <activity
             android:name=".view.CartActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.DetailActivity" />
+        <activity android:name=".view.DetailActivity" />
         <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true"
