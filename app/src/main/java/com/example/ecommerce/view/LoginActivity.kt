@@ -28,9 +28,13 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-        if(binding.emailEditText.text.toString().isEmpty() || binding.passwordEditText.text.toString().isEmpty()){
-            Toast.makeText(this, "Please fill in all fields",Toast.LENGTH_SHORT).show()
+        binding.button.setOnClickListener {
+            if(binding.emailEditText.text.toString().isEmpty() || binding.passwordEditText.text.toString().isEmpty()){
+                Toast.makeText(this, "Please fill in all fields",Toast.LENGTH_SHORT).show()
+            }
         }
+
+
 
     }
 }
