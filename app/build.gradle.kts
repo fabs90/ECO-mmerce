@@ -55,6 +55,6 @@ dependencies {
     
     implementation ("com.google.android.material:material:1.6.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-    implementation ("com.etebarian:meow-bottom-navigation:1.3.1")
+
 
 }

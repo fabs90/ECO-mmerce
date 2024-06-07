@@ -22,10 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val btnMoveActivity: Button = findViewById(R.id.btn1)
-        val btnMoveActivity2: Button = findViewById(R.id.btn2)
-        btnMoveActivity.setOnClickListener(this)
-        btnMoveActivity2.setOnClickListener(this)
+        
 
     }
 
