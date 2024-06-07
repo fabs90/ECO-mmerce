@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/searchBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_margin="16dp"
+        android:layout_margin="16dp"
         android:scaleType="centerCrop"/>
 
 
@@ -65,7 +65,7 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_cart"
         app:backgroundTint="@color/green_main"
-        app:tint="@color/black"
+        app:tint="@color/white"
         app:fabSize="normal"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"

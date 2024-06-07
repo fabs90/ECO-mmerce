@@ -11,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.R
+import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,15 +34,25 @@ class SplashScreenActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        // we used the postDelayed(Runnable, time) method
-        // to send a message with a delayed time.
-        //Normal Handler is deprecated , so we have to change the code little bit
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
 
-        // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
+            checkAuthentication()
+        }, 3000) // 3000 is the delayed time in milliseconds.
+    }
+
+    private fun checkAuthentication() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // User is signed in, go to main activity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            // No user is signed in, go to welcome activity
             val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
-            finish()
-        }, 3000) // 3000 is the delayed time in milliseconds.
+        }
+        finish()
     }
 }

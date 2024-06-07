@@ -15,26 +15,23 @@
         <activity
             android:name=".view.ProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".SearchResultActivity"
+         <activity
+            android:name=".view.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoriteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.CartActivity"
+            android:name=".view.FavoriteActivity"
             android:exported="false" />
         <activity
             android:name=".view.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.CartActivity"
             android:exported="false" />
         <activity android:name=".view.DetailActivity" />
         <activity
@@ -47,12 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.WelcomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.LoginActivity"
-            android:exported="false" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true" />
