@@ -2,6 +2,7 @@ package com.example.ecommerce.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.ecommerce.databinding.ActivityLoginBinding
 import com.example.ecommerce.databinding.ActivityWelcomeBinding
 import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
+import com.example.ecommerce.view.data.api.LoginRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,40 +45,43 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(email, password)
-
             }
         }
     }
 
     private fun loginUser(email: String, password: String) {
-        val call = ApiConfig.apiService.login(email, password)
+        val loginRequest = LoginRequest(email, password) // Create LoginRequest object
+        val call = ApiConfig.apiService().login(loginRequest)
+        Log.e("LoginActivity", "Login call: $call")
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
                         Toast.makeText(this@LoginActivity, loginResponse.message, Toast.LENGTH_SHORT).show()
-                        if (loginResponse.status == "success") {
+                        if (loginResponse.status == "successful") {
                             // Save token if needed and navigate to MainActivity
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("LoginActivity", "Login Response: ${response.message()}")
+                    Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()} - ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("LoginActivity", "Login error", t)
             }
         })
     }
 
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge
-
-
     }
 }
