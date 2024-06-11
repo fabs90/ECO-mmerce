@@ -2,6 +2,7 @@ package com.example.ecommerce.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +50,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        val call = ApiConfig.apiService.login(email, password)
+        val call = ApiConfig.apiService().login(email, password)
+        Log.e("LoginActivity", "Login call: $call")
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
@@ -62,17 +64,22 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         }
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("LoginActivity", "Login Response: ${response.message()}")
+                    Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()} - ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("LoginActivity", "Login error", t)
             }
         })
     }
+
 
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge

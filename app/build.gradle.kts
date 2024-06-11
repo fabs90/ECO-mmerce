@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.gridlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,5 +77,4 @@ dependencies {
     // Hapus dependensi yang dikomentari jika tidak diperlukan
     // implementation("com.etebarian:meow-bottom-navigation:1.3.1")
 //}
-//
-// >>>>>>> f250934fafde11750676a7794cf184d07251cd0f
+
