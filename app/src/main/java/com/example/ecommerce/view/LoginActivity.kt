@@ -43,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(email, password)
+
             }
         }
     }
@@ -75,5 +76,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge
+
+
     }
 }
