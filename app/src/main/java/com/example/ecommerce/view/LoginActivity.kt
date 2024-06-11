@@ -45,13 +45,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(email, password)
-
             }
         }
     }
 
     private fun loginUser(email: String, password: String) {
-        val loginRequest = LoginRequest(email, password)
+        val loginRequest = LoginRequest(email, password) // Create LoginRequest object
         val call = ApiConfig.apiService().login(loginRequest)
         Log.e("LoginActivity", "Login call: $call")
         call.enqueue(object : Callback<LoginResponse> {
@@ -60,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
                         Toast.makeText(this@LoginActivity, loginResponse.message, Toast.LENGTH_SHORT).show()
-                        if (loginResponse.status == "success") {
+                        if (loginResponse.status == "successful") {
                             // Save token if needed and navigate to MainActivity
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
@@ -82,10 +81,7 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge
-
-
     }
 }
