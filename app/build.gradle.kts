@@ -54,12 +54,27 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.play.services.auth)
-    implementation(libs.material.v160)
-    implementation(libs.circleimageview)
-    implementation(libs.androidx.credentials)
-    implementation(libs.androidx.credentials.play.services.auth)
-    implementation(libs.googleid)
+
+
+    implementation ("com.google.android.material:material:1.3.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.8.1")
+    implementation ("com.squareup.retrofit2:converter-gson:2.8.1")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.6.0")
+    
+    implementation ("com.google.android.material:material:1.6.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+
+}
+
+    //implementation(libs.play.services.auth)
+    //implementation(libs.material.v160)
+    //implementation(libs.circleimageview)
+    //implementation(libs.androidx.credentials)
+    //implementation(libs.androidx.credentials.play.services.auth)
+    //implementation(libs.googleid)
     // Hapus dependensi yang dikomentari jika tidak diperlukan
     // implementation("com.etebarian:meow-bottom-navigation:1.3.1")
-}
+//}
+//
+// >>>>>>> f250934fafde11750676a7794cf184d07251cd0f

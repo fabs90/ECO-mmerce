@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 //        val btnMoveActivity: Button = findViewById(R.id.btn1)
 //        val btnMoveActivity2: Button = findViewById(R.id.btn2)
 //        btnMoveActivity.setOnClickListener(this)
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             finish()
             return
         }
+
 
         /*
             Set the bottom navigation
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
 
     }
 
