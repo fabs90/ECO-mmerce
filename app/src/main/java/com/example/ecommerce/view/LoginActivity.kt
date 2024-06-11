@@ -13,6 +13,7 @@ import com.example.ecommerce.databinding.ActivityLoginBinding
 import com.example.ecommerce.databinding.ActivityWelcomeBinding
 import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
+import com.example.ecommerce.view.data.api.LoginRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +51,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        val call = ApiConfig.apiService().login(email, password)
+        val loginRequest = LoginRequest(email, password)
+        val call = ApiConfig.apiService().login(loginRequest)
         Log.e("LoginActivity", "Login call: $call")
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
