@@ -51,9 +51,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        val loginRequest = LoginRequest(email, password) // Create LoginRequest object
+        val loginRequest = LoginRequest(email, password)
         val call = ApiConfig.apiService().login(loginRequest)
-        Log.d("LoginActivity", "Login call: $call")
+        Log.e("LoginActivity", "Login call: $call")
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
@@ -82,6 +82,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("LoginActivity", "Login error", t)
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("LoginActivity", "Login error", t)
             }
         })
     }
