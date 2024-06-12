@@ -2,6 +2,7 @@ package com.example.ecommerce.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 
@@ -21,88 +22,61 @@ import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-// Nanti tambahin ini setelah AppCOmpatActivity()
-    // , View.OnClickListener
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainActivity", "onCreate called")
+
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-//        val btnMoveActivity: Button = findViewById(R.id.btn1)
-//        val btnMoveActivity2: Button = findViewById(R.id.btn2)
-//        btnMoveActivity.setOnClickListener(this)
-//        btnMoveActivity2.setOnClickListener(this)
-
-        /*
-           * Inititate Firebase
-           * */
-        auth = Firebase.auth
-
-        /*
-           * Check if user not login then redirect to LoginActivity
-           * */
+        auth = FirebaseAuth.getInstance()
         val firebaseUser = auth.currentUser
         if (firebaseUser == null) {
-            // Not signed in, launch the Login activity
+            Log.d("MainActivity", "User not logged in, redirecting to WelcomeActivity")
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
             return
+        } else {
+            Log.d("MainActivity", "User logged in: ${firebaseUser.email}")
         }
 
-
-        /*
-            Set the bottom navigation
-         */
-        val navView : BottomNavigationView = binding.bottomNavigation
+        val navView: BottomNavigationView = binding.bottomNavigation
         navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    Log.d("MainActivity", "Home selected")
                     true
                 }
                 R.id.navigation_profile -> {
+                    Log.d("MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
                 R.id.navigation_favorite -> {
+                    Log.d("MainActivity", "Favorite selected")
                     val intent = Intent(this, FavoriteActivity::class.java)
                     startActivity(intent)
                     true
                 }
-
                 else -> {
                     false
                 }
             }
         }
-
-
     }
 
-//    override fun onClick(v : View?){
-//        when (v?.id) {
-//            R.id.btn1 -> {
-//                val moveIntent = Intent(this@MainActivity, WelcomeActivity::class.java)
-//                startActivity(moveIntent)
-//            }
-//            R.id.btn2 -> {
-//                val moveIntent = Intent(this@MainActivity, LoginActivity::class.java)
-//                startActivity(moveIntent)
-//            }
-//        }
-//    }
-
-
-
+    private fun enableEdgeToEdge() {
+        // Your implementation for enabling edge-to-edge
+    }
 }
