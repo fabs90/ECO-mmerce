@@ -1,25 +1,16 @@
 package com.example.ecommerce.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.credentials.ClearCredentialStateRequest
-import androidx.credentials.CredentialManager
-import androidx.lifecycle.lifecycleScope
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -39,17 +30,41 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Check login status and handle redirection
+        if (isUserLoggedIn()) {
+            setupNavigation()
+        }
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        // Check if the user is logged in via API token
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("login_token", null)
+
+        // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
         val firebaseUser = auth.currentUser
-        if (firebaseUser == null) {
-            Log.d("MainActivity", "User not logged in, redirecting to WelcomeActivity")
-            startActivity(Intent(this, WelcomeActivity::class.java))
-            finish()
-            return
-        } else {
-            Log.d("MainActivity", "User logged in: ${firebaseUser.email}")
-        }
 
+        return when {
+            token != null -> {
+                Log.d("MainActivity", "User logged in with API token")
+                true
+            }
+            firebaseUser != null -> {
+                Log.d("MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
+                true
+            }
+            else -> {
+                Log.d("MainActivity", "User not logged in, redirecting to LoginActivity")
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                false
+            }
+        }
+    }
+
+    private fun setupNavigation() {
+        // Logic for setting up the bottom navigation
         val navView: BottomNavigationView = binding.bottomNavigation
         navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
