@@ -1,4 +1,4 @@
-package com.example.ecommerce.view.data
+package com.example.ecommerce.view.data.response
 
 data class LoginResponse(
 	val message: String,
