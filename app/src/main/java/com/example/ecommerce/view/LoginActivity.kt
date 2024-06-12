@@ -1,5 +1,6 @@
 package com.example.ecommerce.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.databinding.ActivityLoginBinding
-import com.example.ecommerce.view.data.response.LoginResponse
+import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.LoginRequest
 import retrofit2.Call
@@ -34,6 +35,11 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        binding.backHyperLink.setOnClickListener {
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
+        }
+
         // Set up button click listener
         binding.button.setOnClickListener {
             val email = binding.emailEditText.text.toString()
@@ -56,10 +62,14 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
-                        Toast.makeText(this@LoginActivity, loginResponse.status, Toast.LENGTH_SHORT).show()
+//                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
+//                        Log.d("LoginActivity", "Token saved: ${loginResponse.token}")
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
                         if (loginResponse.status == "successful") {
-                            Log.d("LoginActivity", "Login successful, navigating to MainActivity")
+                            val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("login_token", loginResponse.token)
+                            editor.apply()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -67,31 +77,20 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("LoginActivity", "Login not successful: ${loginResponse.status}")
                         }
                     } else {
-                        Log.d("LoginActivity", "Empty response body")
+                        //Log.d("LoginActivity", "Empty response body")
                         Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.e("LoginActivity", "Login Response: ${response.message()}")
+                    //Log.e("LoginActivity", "Login Response: ${response.message()}")
                     Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()} - ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginActivity", "Login error", t)
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
                 Log.e("LoginActivity", "Login error", t)
             }
         })
     }
 
-    private fun navigateToMainActivity() {
-        Log.d("LoginActivity", "Navigating to MainActivity")
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun enableEdgeToEdge() {
-        // Your implementation for enabling edge-to-edge
-    }
 }
