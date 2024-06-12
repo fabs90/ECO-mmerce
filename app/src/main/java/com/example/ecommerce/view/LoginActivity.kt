@@ -18,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Handle window insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -45,7 +46,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 loginUser(email, password)
-
             }
         }
     }
@@ -59,14 +59,18 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        Toast.makeText(this@LoginActivity, loginResponse.message, Toast.LENGTH_SHORT).show()
-                        if (loginResponse.status == "success") {
-                            // Save token if needed and navigate to MainActivity
+                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
+                        Toast.makeText(this@LoginActivity, loginResponse.status, Toast.LENGTH_SHORT).show()
+                        if (loginResponse.status == "successful") {
+                            Log.d("LoginActivity", "Login successful, navigating to MainActivity")
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
+                        } else {
+                            Log.d("LoginActivity", "Login not successful: ${loginResponse.status}")
                         }
                     } else {
+                        Log.d("LoginActivity", "Empty response body")
                         Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
                     }
                 } else {
@@ -76,16 +80,21 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e("LoginActivity", "Login error", t)
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
                 Log.e("LoginActivity", "Login error", t)
             }
         })
     }
 
+    private fun navigateToMainActivity() {
+        Log.d("LoginActivity", "Navigating to MainActivity")
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge
-
-
     }
 }
