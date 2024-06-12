@@ -77,5 +77,4 @@ dependencies {
     // Hapus dependensi yang dikomentari jika tidak diperlukan
     // implementation("com.etebarian:meow-bottom-navigation:1.3.1")
 //}
-//
-// >>>>>>> f250934fafde11750676a7794cf184d07251cd0f
+
