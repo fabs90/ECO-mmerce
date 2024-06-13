@@ -4,15 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.databinding.ActivityLoginBinding
-import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.LoginRequest
+import com.example.ecommerce.view.data.response.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,9 +58,11 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
         val call = ApiConfig.apiService().login(loginRequest)
-        Log.e("LoginActivity", "Login call: $call")
+        //Log.e("LoginActivity", "Login call: $call")
+        showLoading(true)
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                showLoading(false)
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
@@ -88,14 +91,16 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
                 Log.e("LoginActivity", "Login error", t)
             }
         })
     }
 
-<<<<<<< HEAD
+
+    private fun showLoading(status: Boolean) {
+        binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
+    }
 }
-=======
 }
->>>>>>> 05de9ef18fd83b69d72ce0a5958808f3cfb0e0c4

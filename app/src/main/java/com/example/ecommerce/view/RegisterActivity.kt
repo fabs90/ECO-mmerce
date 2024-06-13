@@ -4,28 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.ecommerce.R
-import com.example.ecommerce.databinding.ActivityLoginBinding
 import com.example.ecommerce.databinding.ActivityRegisterBinding
 import com.example.ecommerce.view.data.api.ApiConfig
-import com.example.ecommerce.view.data.api.ApiService
 import com.example.ecommerce.view.data.api.RegisterRequest
 import com.example.ecommerce.view.data.response.RegisterResponse
-import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.log
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -61,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(name: String, email: String, phone: String, password: String) {
         val registerRequest = RegisterRequest(name, email, phone, password)
         val call = ApiConfig.apiService().register(registerRequest)
-        Log.e("RegisterActivity", "Register call: $call")
+        //Log.e("RegisterActivity", "Register call: $call")
         showLoading(true)
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
