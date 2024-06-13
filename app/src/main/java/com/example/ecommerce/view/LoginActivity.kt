@@ -1,5 +1,6 @@
 package com.example.ecommerce.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +9,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityLoginBinding
-import com.example.ecommerce.databinding.ActivityWelcomeBinding
-import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.LoginRequest
+import com.example.ecommerce.view.data.response.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -30,10 +30,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Handle window insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.backHyperLink.setOnClickListener {
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
         }
 
         // Set up button click listener
@@ -58,20 +63,37 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
+
                         Toast.makeText(this@LoginActivity, loginResponse.message, Toast.LENGTH_SHORT).show()
                         if (loginResponse.status == "successful") {
                             // Save token if needed and navigate to MainActivity
+
+//                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
+//                        Log.d("LoginActivity", "Token saved: ${loginResponse.token}")
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                        if (loginResponse.status == "successful") {
+                            val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("login_token", loginResponse.token)
+                            editor.apply()
+
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
+                        } else {
+                            Log.d("LoginActivity", "Login not successful: ${loginResponse.status}")
                         }
                     } else {
+                        //Log.d("LoginActivity", "Empty response body")
                         Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.e("LoginActivity", "Login Response: ${response.message()}")
+                    //Log.e("LoginActivity", "Login Response: ${response.message()}")
                     Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()} - ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
+            }
+
+
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -79,9 +101,12 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("LoginActivity", "Login error", t)
             }
         })
-    }
 
+    }
     private fun enableEdgeToEdge() {
         // Your implementation for enabling edge-to-edge
     }
 }
+
+
+
