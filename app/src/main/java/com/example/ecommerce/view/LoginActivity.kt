@@ -98,9 +98,9 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+
     private fun showLoading(status: Boolean) {
         binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
     }
-
-
+}
 }

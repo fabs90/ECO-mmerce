@@ -153,10 +153,53 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/button" />
 
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/green_main"
+                    android:text="Sign In"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout"
+                    tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/backHyperLink"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:autoLink="none"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="Back"
+                    android:textColor="@color/green_main"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button" />
 
+                <TextView
+                    android:id="@+id/backHyperLink"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:autoLink="none"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="Back"
+                    android:textColor="@color/green_main"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,67 +20,69 @@
 
     <!-- Profile Details -->
 
-
     <TextView
         android:id="@+id/textViewProfilename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/profile"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="127dp" />
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textViewProfileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="30dp"
         android:text="@string/profile_email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewProfilename" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="530dp"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewProfileEmail"
-        app:layout_constraintStart_toStartOf="parent"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- About Me Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+            android:padding="8dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_profile"
-                /> <!-- Replace with your icon -->
+                android:src="@drawable/ic_profile" /> <!-- Replace with your icon -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/about_me"
                 android:layout_marginStart="16dp"
+                android:text="@string/about_me"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Cart Button -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+            android:padding="8dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -90,8 +92,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cart"
                 android:layout_marginStart="16dp"
+                android:text="@string/cart"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -99,9 +101,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+            android:padding="8dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -111,8 +113,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my_address"
                 android:layout_marginStart="16dp"
+                android:text="@string/my_address"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -120,9 +122,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+            android:padding="8dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -132,8 +134,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/transaction"
                 android:layout_marginStart="16dp"
+                android:text="@string/transaction"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -142,11 +144,11 @@
             android:id="@+id/btn_signOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -156,12 +158,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="@string/sign_out"
                 android:textColor="@color/red"
-                android:layout_marginStart="16dp"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
