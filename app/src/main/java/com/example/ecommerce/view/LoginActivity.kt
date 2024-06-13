@@ -5,13 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.databinding.ActivityLoginBinding
-import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.LoginRequest
+import com.example.ecommerce.view.data.response.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
