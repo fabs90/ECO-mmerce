@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -57,9 +58,11 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
         val call = ApiConfig.apiService().login(loginRequest)
-        Log.e("LoginActivity", "Login call: $call")
+        //Log.e("LoginActivity", "Login call: $call")
+        showLoading(true)
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                showLoading(false)
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
@@ -88,10 +91,16 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
                 Log.e("LoginActivity", "Login error", t)
             }
         })
     }
+
+    private fun showLoading(status: Boolean) {
+        binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
+    }
+
 
 }

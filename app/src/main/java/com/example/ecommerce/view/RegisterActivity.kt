@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(name: String, email: String, phone: String, password: String) {
         val registerRequest = RegisterRequest(name, email, phone, password)
         val call = ApiConfig.apiService().register(registerRequest)
-        Log.e("RegisterActivity", "Register call: $call")
+        //Log.e("RegisterActivity", "Register call: $call")
         showLoading(true)
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
