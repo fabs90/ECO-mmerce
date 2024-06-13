@@ -1,7 +1,9 @@
 package com.example.ecommerce.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,17 +26,36 @@ class FavoriteActivity : AppCompatActivity() {
             insets
         }
 
-        auth = Firebase.auth
+    if(isUserLoggedIn()) {
 
-        /*
-           * Check if user not login then redirect to LoginActivity
-           * */
+    }
+
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        // Check if the user is logged in via API token
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("login_token", null)
+
+        // Initialize FirebaseAuth
+        auth = FirebaseAuth.getInstance()
         val firebaseUser = auth.currentUser
-        if (firebaseUser == null) {
-            // Not signed in, launch the Login activity
-            startActivity(Intent(this, WelcomeActivity::class.java))
-            finish()
-            return
+
+        return when {
+            token != null -> {
+                Log.d("MainActivity", "User logged in with API token")
+                true
+            }
+            firebaseUser != null -> {
+                Log.d("MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
+                true
+            }
+            else -> {
+                Log.d("MainActivity", "User not logged in, redirecting to LoginActivity")
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                false
+            }
         }
     }
 }

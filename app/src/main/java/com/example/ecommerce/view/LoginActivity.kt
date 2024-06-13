@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.databinding.ActivityLoginBinding
-import com.example.ecommerce.view.data.response.LoginResponse
+import com.example.ecommerce.view.data.LoginResponse
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.LoginRequest
 import retrofit2.Call
@@ -94,4 +94,8 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 05de9ef18fd83b69d72ce0a5958808f3cfb0e0c4
