@@ -17,7 +17,7 @@ interface ApiService {
     fun register(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
     @GET("products")
-    fun getProducts(@Body productsRequest: ProductsItem): Call<ProductsResponse>
+    fun getProducts(): Call<ProductsResponse>
 }
 
 data class LoginRequest(
