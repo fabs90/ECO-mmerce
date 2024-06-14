@@ -68,9 +68,11 @@ class LoginActivity : AppCompatActivity() {
                     if (loginResponse != null) {
 //                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
 //                        Log.d("LoginActivity", "Token saved: ${loginResponse.token}")
-                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
+                            .show()
                         if (loginResponse.status == "successful") {
-                            val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                            val sharedPreferences =
+                                getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
                             editor.putString("login_token", loginResponse.token)
                             editor.apply()
@@ -82,17 +84,29 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         //Log.d("LoginActivity", "Empty response body")
-                        Toast.makeText(this@LoginActivity, "Empty response body", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Empty response body",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     //Log.e("LoginActivity", "Login Response: ${response.message()}")
-                    Toast.makeText(this@LoginActivity, "Login failed with response code: ${response.code()} - ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Login failed with response code: ${response.code()} - ${response.message()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 showLoading(false)
-                Toast.makeText(this@LoginActivity, "Login failed with error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Login failed with error: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.e("LoginActivity", "Login error", t)
             }
         })
@@ -102,5 +116,4 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoading(status: Boolean) {
         binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
     }
-}
 }
