@@ -4,42 +4,43 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.view.data.api.ProductsItem
 
-class ProductAdapter(private val context: Context, private val productList: List<ProductsItem>) : BaseAdapter() {
+class ProductAdapter(private val context: Context, private var productList: List<ProductsItem>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    override fun getCount(): Int {
-        return productList.size
-    }
-
-    override fun getItem(position: Int): Any {
-        return productList[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_product, parent, false)
-        val product = productList[position]
-
+    class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.productImage)
         val nameTextView: TextView = view.findViewById(R.id.productName)
         val priceTextView: TextView = view.findViewById(R.id.productPrice)
+    }
 
-        nameTextView.text = product.name
-        priceTextView.text = product.price.toString()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false)
+        return ProductViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val product = productList[position]
+        holder.nameTextView.text = product.name
+        holder.priceTextView.text = product.price.toString()
 
         Glide.with(context)
             .load(product.image)
-            .into(imageView)
+            .error(R.drawable.google_g_icon) // Add an error placeholder
+            .into(holder.imageView)
+    }
 
-        return view
+    override fun getItemCount(): Int {
+        return productList.size
+    }
+
+    fun updateProductList(newProductList: List<ProductsItem>) {
+        productList = newProductList
+        notifyDataSetChanged()
     }
 }
