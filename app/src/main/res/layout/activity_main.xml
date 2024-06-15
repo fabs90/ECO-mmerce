@@ -16,15 +16,14 @@
         android:hint="@string/searchbar_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.google.android.material.search.SearchBar>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/headerImageView"
         android:layout_width="0dp"
         android:layout_height="180dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="Header Image"
         android:scaleType="centerCrop"
         android:src="@drawable/img_register"
@@ -32,30 +31,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gridProduct"
         android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:horizontalSpacing="6dp"
-        android:numColumns="2"
-        android:verticalSpacing="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="245dp"
-        tools:listitem="@layout/item_product" />
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-          android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_gravity="start"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
+        app:layout_constraintTop_toBottomOf="@id/headerImageView"
+        tools:listitem="@layout/item_product" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/menu" />
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -65,10 +68,9 @@
         android:src="@drawable/ic_cart"
         app:backgroundTint="@color/green_main"
         app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner"
         app:tint="@color/white" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
