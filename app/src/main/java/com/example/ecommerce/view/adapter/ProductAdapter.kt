@@ -1,6 +1,7 @@
 package com.example.ecommerce.view.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,11 @@ class ProductAdapter(private val context: Context, private val productList: List
         nameTextView.text = product.name
         priceTextView.text = product.price.toString()
 
+        Log.d("ProductAdapter", "Loading image: ${product.image}")
         Glide.with(context)
             .load(product.image)
+            .placeholder(R.drawable.ic_placeholder) // Set a placeholder image
+            .error(R.drawable.ic_broken) // Set an error image
             .into(imageView)
 
         return view
