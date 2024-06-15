@@ -35,14 +35,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gridProduct"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_width="202dp"
+        android:layout_height="298dp"
         android:horizontalSpacing="6dp"
         android:numColumns="2"
         android:verticalSpacing="20dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="245dp"
+        tools:layout_editor_absoluteY="247dp"
         tools:listitem="@layout/item_product" />
 
 
