@@ -8,8 +8,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/product_card"
-        android:layout_width="153dp"
-        android:layout_height="247dp"
+        android:layout_width="160dp"
+        android:layout_height="260dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         app:cardCornerRadius="16dp"
@@ -20,7 +20,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/productImage"
             android:layout_width="match_parent"
-            android:layout_height="171dp"
+            android:layout_height="169dp"
             android:contentDescription="Product Image"
             android:scaleType="centerCrop"
             android:src="@drawable/img_example"
@@ -28,14 +28,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="91dp"
             android:layout_gravity="bottom"
             android:padding="8dp">
 
             <TextView
                 android:id="@+id/productName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="123dp"
+                android:layout_height="41dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:text="Tote Bag"
@@ -45,11 +45,13 @@
 
             <TextView
                 android:id="@+id/productPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
 
+
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:text="Rp 100.000"
                 android:textColor="@color/green_main"
                 android:textSize="18sp" />
