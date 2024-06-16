@@ -1,15 +1,20 @@
 package com.example.ecommerce.view.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
+import com.example.ecommerce.databinding.ItemProductBinding
+import com.example.ecommerce.view.DetailActivity
 import com.example.ecommerce.view.data.api.ProductsItem
 
 class ProductAdapter(
@@ -45,6 +50,12 @@ class ProductAdapter(
             .load(product.image)
             .error(R.drawable.ic_broken) // Add an error placeholder
             .into(holder.imageView)
+        val binding = ItemProductBinding.bind(holder.itemView)
+        binding.productCard.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
+            context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
+        }
     }
 
     override fun getItemCount(): Int {

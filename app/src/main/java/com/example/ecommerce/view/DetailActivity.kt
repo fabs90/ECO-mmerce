@@ -10,12 +10,14 @@ import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityDetailBinding
 import com.example.ecommerce.view.data.api.ApiConfig
+import com.example.ecommerce.view.data.api.ProductsItem
 import com.example.ecommerce.view.data.response.ProductsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val product = response.body()?.products?.find { it.id == productId }
                     if (product != null) {
-                       // displayProductDetails(product)
+                       displayProductDetails(product)
                     }
                 } else {
                     Toast.makeText(this@DetailActivity, "Failed to load product details", Toast.LENGTH_SHORT).show()
@@ -57,7 +59,17 @@ class DetailActivity : AppCompatActivity() {
         })
     }
 
-   /*fun displayProductDetails(product) {
-
-   }*/
+   private fun displayProductDetails(product: ProductsItem) {
+       binding.apply {
+           Glide.with(this@DetailActivity)
+               .load(product.image)
+               .into(imageView3)
+           detailTitleTv.text = product.name
+          // detailPriceTv.text = product.price.toString()
+           descriptionTv.text = product.description
+       }
+   }
+    companion object {
+        const val EXTRA_PRODUCT = "product_id"
+   }
 }
