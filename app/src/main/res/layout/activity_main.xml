@@ -32,19 +32,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gridProduct"
-        android:layout_width="202dp"
-        android:layout_height="298dp"
-        android:horizontalSpacing="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:numColumns="2"
-        android:verticalSpacing="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="247dp"
+        app:layout_constraintTop_toBottomOf="@id/headerImageView"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_product" />
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -55,7 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -69,6 +65,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner"
         app:tint="@color/white" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -109,7 +109,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        productAdapter = ProductAdapter(this, listOf())
+        productAdapter = ProductAdapter(this, listOf()) { product ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("product_id", product.id)
+            startActivity(intent)
+        }
         binding.gridProduct.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = productAdapter
