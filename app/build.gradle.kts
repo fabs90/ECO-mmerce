@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
     buildToolsVersion = "34.0.0"
 }
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.androidx.gridlayout)
     implementation(libs.firebase.auth)
     implementation(libs.googleid)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

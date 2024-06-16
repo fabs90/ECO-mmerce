@@ -24,6 +24,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    // creating constant keys for shared preferences.
+    companion object {
+        const val SHARED_PREFS = "shared_prefs"
+        const val TOKEN_KEY = "token_key"
+    }
+
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var productAdapter: ProductAdapter
@@ -51,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun isUserLoggedIn(): Boolean {
         // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(TOKEN_KEY, null)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()

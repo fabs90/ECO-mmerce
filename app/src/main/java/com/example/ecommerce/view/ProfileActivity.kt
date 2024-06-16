@@ -45,8 +45,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun isUserLoggedIn(): Boolean {
         // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
@@ -74,12 +74,12 @@ class ProfileActivity : AppCompatActivity() {
 
     // Sign out
     private fun signOut() {
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
 
         if (token != null) {
             // Logout for API-based login
-            sharedPreferences.edit().remove("login_token").apply()
+            sharedPreferences.edit().remove(MainActivity.TOKEN_KEY).apply()
             Log.d("ProfileActivity", "User logged out from API-based login")
             val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
