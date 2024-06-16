@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="312dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/product_card"
         android:layout_width="160dp"
-        android:layout_height="260dp"
+        android:layout_height="280dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         app:cardCornerRadius="16dp"
@@ -28,35 +28,35 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="111dp"
             android:layout_gravity="bottom"
             android:padding="8dp">
 
             <TextView
                 android:id="@+id/productName"
-                android:layout_width="123dp"
-                android:layout_height="41dp"
+                style="@style/item_product_title"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
                 android:text="Tote Bag"
-                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/productPrice"
+                style="@style/item_product_style"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-
-
-                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/productName"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="16dp"
                 android:text="Rp 100.000"
-                android:textColor="@color/green_main"
                 android:textSize="18sp" />
 
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
