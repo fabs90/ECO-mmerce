@@ -2,6 +2,7 @@ package com.example.ecommerce.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.example.ecommerce.databinding.ActivitySearchResultBinding
 import com.example.ecommerce.view.adapter.ProductAdapter
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.response.ProductsResponse
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +28,8 @@ class SearchResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupNavigation()
 
         productAdapter = ProductAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
@@ -62,5 +66,38 @@ class SearchResultActivity : AppCompatActivity() {
                 Toast.makeText(this@SearchResultActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun setupNavigation() {
+        // Logic for setting up the bottom navigation
+        val navView: BottomNavigationView = binding.bottomNavigation
+        navView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    Log.d("MainActivity", "Home selected")
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.navigation_profile -> {
+                    Log.d("MainActivity", "Profile selected")
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.navigation_favorite -> {
+                    Log.d("MainActivity", "Favorite selected")
+                    val intent = Intent(this, FavoriteActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
+        }
     }
 }
