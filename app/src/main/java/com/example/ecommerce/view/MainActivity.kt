@@ -88,13 +88,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setupSearchBar() {
-        val searchBar = findViewById<SearchView>(R.id.searchBar)
+        val searchBar = findViewById<SearchView>(R.id.search_view)
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
-                    val intent = Intent(this@MainActivity, SearchResultActivity::class.java)
-                    intent.putExtra("search_query", query)
-                    startActivity(intent)
+                    searchProducts(query)
                 }
                 return true
             }
@@ -166,6 +164,25 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                 showLoading(false)
+                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun searchProducts(query: String) {
+        val call = ApiConfig.apiService().getProducts()
+        call.enqueue(object : Callback<ProductsResponse> {
+            override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
+                if (response.isSuccessful) {
+                    val products = response.body()?.products?.filter {
+                        it.name.contains(query, ignoreCase = true)
+                    } ?: emptyList()
+                    productAdapter.updateProductList(products)
+                } else {
+                    Toast.makeText(this@MainActivity, "Failed to load products", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
