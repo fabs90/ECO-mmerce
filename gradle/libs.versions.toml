@@ -18,6 +18,8 @@ materialVersion = "1.6.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
 playServicesAuth = "21.1.1"
+tensorflowLiteSupport = "0.1.0"
+tensorflowLiteMetadata = "0.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +38,8 @@ androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", vers
 material-v160 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
+tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

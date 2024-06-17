@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         if (isUserLoggedIn()) {
             setupNavigation()
             setupRecyclerView()
+            setupSearchBar()
             getAllProducts()
         }
     }
@@ -75,6 +77,24 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+    private fun setupSearchBar() {
+        val searchBar = findViewById<SearchView>(R.id.searchBar)
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrEmpty()) {
+                    val intent = Intent(this@MainActivity, SearchResultActivity::class.java)
+                    intent.putExtra("search_query", query)
+                    startActivity(intent)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Optional: Handle text change if needed
+                return false
+            }
+        })
     }
 
     private fun setupNavigation() {
