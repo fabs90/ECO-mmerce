@@ -36,6 +36,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { textView, actionId, event ->
+                    val query = searchView.text.toString()
+                    searchBar.setText(query)
+                    searchView.hide()
+                    if (query.isNotEmpty()) {
+                        val intent = Intent(this@MainActivity, SearchResultActivity::class.java).apply {
+                            putExtra("search_query", query)
+                        }
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Search query is empty", Toast.LENGTH_SHORT).show()
+                    }
+                    false
+                }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -45,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         if (isUserLoggedIn()) {
             setupNavigation()
             setupRecyclerView()
-            setupSearchBar()
             getAllProducts()
         }
     }
@@ -77,22 +96,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-    }
-    private fun setupSearchBar() {
-        val searchBar = findViewById<SearchView>(R.id.search_view)
-        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (!query.isNullOrEmpty()) {
-                    searchProducts(query)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Optional: Handle text change if needed
-                return false
-            }
-        })
     }
 
     private fun setupNavigation() {
@@ -145,25 +148,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
                 if (response.isSuccessful) {
                     val products = response.body()?.products ?: emptyList()
-                    productAdapter.updateProductList(products)
-                } else {
-                    Toast.makeText(this@MainActivity, "Failed to load products", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-    private fun searchProducts(query: String) {
-        val call = ApiConfig.apiService().getProducts()
-        call.enqueue(object : Callback<ProductsResponse> {
-            override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
-                if (response.isSuccessful) {
-                    val products = response.body()?.products?.filter {
-                        it.name.contains(query, ignoreCase = true)
-                    } ?: emptyList()
                     productAdapter.updateProductList(products)
                 } else {
                     Toast.makeText(this@MainActivity, "Failed to load products", Toast.LENGTH_SHORT).show()
