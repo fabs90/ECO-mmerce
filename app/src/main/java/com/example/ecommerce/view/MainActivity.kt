@@ -50,11 +50,32 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { textView, actionId, event ->
+                    val query = searchView.text.toString()
+                    searchBar.setText(query)
+                    searchView.hide()
+                    if (query.isNotEmpty()) {
+                        val intent = Intent(this@MainActivity, SearchResultActivity::class.java).apply {
+                            putExtra("search_query", query)
+                        }
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Search query is empty", Toast.LENGTH_SHORT).show()
+                    }
+                    false
+                }
+        }
+
         // Check login status and handle redirection
         if (isUserLoggedIn()) {
             setupNavigation()
             setupRecyclerView()
-            setupSearchBar()
             getAllProducts()
         }
     }
@@ -86,10 +107,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-    }
-
-    private fun setupSearchBar() {
-      
     }
 
     private fun setupNavigation() {
