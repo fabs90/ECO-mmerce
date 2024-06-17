@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityDetailBinding
@@ -18,6 +19,7 @@ import com.example.ecommerce.view.data.local.FavoriteDatabase
 import com.example.ecommerce.view.data.local.FavoriteProduct
 import com.example.ecommerce.view.data.local.FavoriteProductDao
 import com.example.ecommerce.view.data.response.ProductsResponse
+import com.example.ecommerce.view.model.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,17 +28,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
+
     private var isFavorite = false
-    private lateinit var product: ProductsItem
+
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var favoriteProductDao: FavoriteProductDao
+
+    private lateinit var viewModel: ViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val id = intent.getStringExtra(EXTRA_PRODUCT)
+        val name = intent.getStringExtra(EXTRA_NAME)
+        val price = intent.getStringExtra(EXTRA_PRICE)
+        val image = intent.getStringExtra(EXTRA_IMAGE)
 
       //  favoriteProductDao = FavoriteDatabase.getDatabase(this).favoriteProductDao()
        // sharedPreferences = getSharedPreferences("FavoriteItems", MODE_PRIVATE)
@@ -51,8 +60,25 @@ class DetailActivity : AppCompatActivity() {
             // Fetch and display product details using the productId
             fetchProductDetails(productId)
         }
+
         //setupFavoriteButton()
         //setupAddToCartButton()
+        viewModel.viewModelScope.launch {
+            val count = id?.let { viewModel.checkFavorite(it) }
+            if (count != null){
+                isFavorite = count > 0
+                updateFavoriteButton()
+            }
+        }
+        binding.favoriteBtn.setOnClickListener {
+            isFavorite = !isFavorite
+            if (isFavorite) {
+                viewModel.addToFavorite(name.orEmpty() ,id.orEmpty(), price.toString(), image.orEmpty())
+            }else{
+                id?.let { it1 -> viewModel.removeFromFavorite(it1) }
+            }
+            updateFavoriteButton()
+        }
     }
 
     private fun fetchProductDetails(productId: String) {
@@ -85,6 +111,12 @@ class DetailActivity : AppCompatActivity() {
            descriptionTv.text = product.description
        }
    }
+    private fun updateFavoriteButton() {
+        binding.favoriteBtn.setImageResource(
+            if (isFavorite) R.drawable.ic_favorite_red
+            else R.drawable.ic_favorite
+        )
+    }
   /*  private fun setupFavoriteButton() {
         val favoriteButton: ImageButton = binding.favoriteBtn
         updateFavoriteButtonState()
@@ -127,5 +159,8 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_PRODUCT = "product_id"
+        const val EXTRA_NAME = "product_name"
+        const val EXTRA_PRICE = "product_price"
+        const val EXTRA_IMAGE = "product_image"
    }
 }

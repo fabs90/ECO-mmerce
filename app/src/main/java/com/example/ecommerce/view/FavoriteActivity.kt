@@ -1,89 +1,70 @@
 package com.example.ecommerce.view
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityFavoriteBinding
-import com.example.ecommerce.view.adapter.ProductAdapter
-import com.example.ecommerce.view.data.local.FavoriteProductDao
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
+import com.example.ecommerce.view.adapter.FavoriteAdapter
+import com.example.ecommerce.view.data.api.ProductsItem
+import com.example.ecommerce.view.data.local.FavoriteProduct
+import com.example.ecommerce.view.model.FavoriteViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class FavoriteActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var favoriteProductDao: FavoriteProductDao
-    private lateinit var favoriteAdapter: ProductAdapter
-    private lateinit var binding: ActivityFavoriteBinding
 
+    private lateinit var viewModel: FavoriteViewModel
+    private lateinit var binding: ActivityFavoriteBinding
+    private lateinit var adapter: FavoriteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_favorite)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityFavoriteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+
+        adapter = FavoriteAdapter().apply {
+            setOnItemClickCallback(object : FavoriteAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: ProductsItem) {
+                    //navigateToDetail(data)
+                }
+            })
         }
-
-    if(isUserLoggedIn()) {
-        //loadFavoriteItems()
-        //setupRecyclerView()
-    }
-
-    }
-    /*private fun setupRecyclerView() {
         binding.recyclerViewFavorite.apply {
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
-            favoriteAdapter = ProductAdapter(this@FavoriteActivity, emptyList()) // Initialize with empty list
-            adapter = favoriteAdapter
+            adapter = this@FavoriteActivity.adapter
+        }
+
+        // Use coroutines to fetch favorite products
+        CoroutineScope(Dispatchers.Main).launch {
+            val favoriteProducts = withContext(Dispatchers.IO) {
+                viewModel.getFavoriteProduct()
+            }
+            favoriteProducts?.let {
+                val list = mapFavoriteProductToProductList(it)
+                adapter.setList(list)
+            }
         }
     }
 
-    private fun loadFavoriteItems() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val favoriteItems = favoriteProductDao.getFavoriteProducts()
-            runOnUiThread {
-                favoriteAdapter.updateProductList(favoriteItems)
-            }
+    private fun mapFavoriteProductToProductList(favoriteProducts: List<FavoriteProduct>): List<ProductsItem> {
+        return favoriteProducts.map { product ->
+            ProductsItem(product.id, product.name, product.price, product.image)
         }
-    }*/
+    }
 
-    private fun isUserLoggedIn(): Boolean {
-        // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
-
-        // Initialize FirebaseAuth
-        auth = FirebaseAuth.getInstance()
-        val firebaseUser = auth.currentUser
-
-        return when {
-            token != null -> {
-                Log.d("MainActivity", "User logged in with API token")
-                true
-            }
-            firebaseUser != null -> {
-                Log.d("MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
-                true
-            }
-            else -> {
-                Log.d("MainActivity", "User not logged in, redirecting to LoginActivity")
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-                false
-            }
-        }
+    private fun ProductsItem(
+        image: String,
+        createdAt: String,
+        price: String,
+        name: String
+    ): ProductsItem {
+            TODO("Not yet implemented")
     }
 }
