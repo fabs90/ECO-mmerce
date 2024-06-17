@@ -17,16 +17,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.search.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/searchbar_hint"
+        app:layout_anchor="@id/searchBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </com.google.android.material.search.SearchView>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:numColumns="2"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+<<<<<<< HEAD
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+=======
         app:layout_constraintTop_toBottomOf="@id/searchBar"
+>>>>>>> 5589de9a78ae430f83d4dfd453bf7e11c1053850
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+<<<<<<< HEAD
+
+=======
     <com.google.android.material.search.SearchView
         android:id="@+id/search_view"
         android:layout_width="0dp"
@@ -38,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+>>>>>>> 5589de9a78ae430f83d4dfd453bf7e11c1053850
 
             <ImageView
                 android:id="@+id/headerImageView"
