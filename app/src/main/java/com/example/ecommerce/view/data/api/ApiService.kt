@@ -1,6 +1,5 @@
 package com.example.ecommerce.view.data.api
 
-import com.example.ecommerce.view.data.response.CreatedAt
 import com.example.ecommerce.view.data.response.LoginResponse
 import com.example.ecommerce.view.data.response.ProductsResponse
 import com.example.ecommerce.view.data.response.RegisterResponse
@@ -33,8 +32,8 @@ data class RegisterRequest(
 )
 data class ProductsItem(
     val image: String,
-    val createdAt: CreatedAt,
-    val price: Int,
+    val createdAt: String,
+    val price: String,
     val name: String,
     val description: String,
     val id: String

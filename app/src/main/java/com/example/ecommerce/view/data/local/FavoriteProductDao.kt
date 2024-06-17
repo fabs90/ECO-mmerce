@@ -14,9 +14,9 @@ interface FavoriteProductDao {
     @Query("SELECT * FROM favorite_product")
     suspend fun getFavoriteProducts(): List<FavoriteProduct>
 
-    @Query("DELETE FROM favorite_product WHERE productId = :productId")
-    suspend fun removeFavoriteProduct(productId: String)
+    @Query("DELETE FROM favorite_product WHERE id = :id")
+    suspend fun removeFavoriteProduct(id: String)
 
-    @Query("SELECT COUNT(*) FROM favorite_product WHERE productId = :productId")
-    suspend fun checkIfFavorite(productId: String): Int
+    @Query("SELECT COUNT(*) FROM favorite_product WHERE id = :id")
+    suspend fun checkFavorite(id: String): Int
 }
