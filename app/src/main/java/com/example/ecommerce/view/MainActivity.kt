@@ -87,23 +87,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun setupSearchBar() {
-        val searchBar = findViewById<SearchView>(R.id.searchBar)
-        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (!query.isNullOrEmpty()) {
-                    val intent = Intent(this@MainActivity, SearchResultActivity::class.java)
-                    intent.putExtra("search_query", query)
-                    startActivity(intent)
-                }
-                return true
-            }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Optional: Handle text change if needed
-                return false
-            }
-        })
+    private fun setupSearchBar() {
+      
     }
 
     private fun setupNavigation() {
