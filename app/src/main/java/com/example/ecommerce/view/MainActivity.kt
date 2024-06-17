@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    // creating constant keys for shared preferences.
+    companion object {
+        const val SHARED_PREFS = "shared_prefs"
+        const val TOKEN_KEY = "token_key"
+    }
+
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var productAdapter: ProductAdapter
@@ -52,8 +61,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun isUserLoggedIn(): Boolean {
         // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(TOKEN_KEY, null)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
@@ -127,6 +136,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        showLoading(true)
         productAdapter = ProductAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("product_id", product.id)
@@ -143,6 +153,7 @@ class MainActivity : AppCompatActivity() {
         val call = ApiConfig.apiService().getProducts()
         call.enqueue(object : Callback<ProductsResponse> {
             override fun onResponse(call: Call<ProductsResponse>, response: Response<ProductsResponse>) {
+                showLoading(false)
                 if (response.isSuccessful) {
                     val products = response.body()?.products ?: emptyList()
                     productAdapter.updateProductList(products)
@@ -152,6 +163,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -174,6 +186,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun showLoading(status: Boolean) {
+        binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 
 }

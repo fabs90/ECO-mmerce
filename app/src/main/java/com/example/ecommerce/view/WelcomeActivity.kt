@@ -1,5 +1,6 @@
 package com.example.ecommerce.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,11 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
 
+        // Check if user is already logged in
+        if (isUserLoggedIn()) {
+            redirectToMainActivity()
+        }
+
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
@@ -62,6 +68,19 @@ class WelcomeActivity : AppCompatActivity() {
             signIn()
         }
     }
+
+    private fun isUserLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
+        return token != null
+    }
+
+    private fun redirectToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 
     private fun signIn() {
         // Get all account credential

@@ -34,8 +34,8 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun isUserLoggedIn(): Boolean {
         // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
