@@ -38,8 +38,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        favoriteProductDao = FavoriteDatabase.getDatabase(this).favoriteProductDao()
-        sharedPreferences = getSharedPreferences("FavoriteItems", MODE_PRIVATE)
+      //  favoriteProductDao = FavoriteDatabase.getDatabase(this).favoriteProductDao()
+       // sharedPreferences = getSharedPreferences("FavoriteItems", MODE_PRIVATE)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
             // Fetch and display product details using the productId
             fetchProductDetails(productId)
         }
-        setupFavoriteButton()
+        //setupFavoriteButton()
         //setupAddToCartButton()
     }
 
@@ -85,7 +85,7 @@ class DetailActivity : AppCompatActivity() {
            descriptionTv.text = product.description
        }
    }
-    private fun setupFavoriteButton() {
+  /*  private fun setupFavoriteButton() {
         val favoriteButton: ImageButton = binding.favoriteBtn
         updateFavoriteButtonState()
 
@@ -123,7 +123,7 @@ class DetailActivity : AppCompatActivity() {
     }
     private fun checkIfFavorite(productId: String): Boolean {
         return sharedPreferences.getBoolean("favorite_$productId", false)
-    }
+    }*/
 
     companion object {
         const val EXTRA_PRODUCT = "product_id"
