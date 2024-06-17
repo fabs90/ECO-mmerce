@@ -2,6 +2,7 @@ package com.example.ecommerce.view
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,7 +22,6 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -72,9 +72,9 @@ class LoginActivity : AppCompatActivity() {
                             .show()
                         if (loginResponse.status == "successful") {
                             val sharedPreferences =
-                                getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                                getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
-                            editor.putString("login_token", loginResponse.token)
+                            editor.putString(MainActivity.TOKEN_KEY, loginResponse.token)
                             editor.apply()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
