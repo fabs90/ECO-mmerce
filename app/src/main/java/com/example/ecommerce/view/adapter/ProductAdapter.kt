@@ -19,7 +19,6 @@ import com.example.ecommerce.view.data.api.ProductsItem
 
 class ProductAdapter(
     private val context: Context,
-    private var list: ArrayList<ProductsItem>,
     private var productList: List<ProductsItem>,
     private val onItemClick: (ProductsItem) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
@@ -57,11 +56,6 @@ class ProductAdapter(
             intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
             context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
         }
-    }
-    fun setList(productList: List<ProductsItem>){
-        list.clear()
-        list.addAll(productList)
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
