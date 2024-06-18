@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/fabs90/ECO-mmerce"><img src="https://ibb.co.com/Xkh4Dn1" alt="Ecommerce" width="200"></a>
+  <a href="https://github.com/fabs90/ECO-mmerce"><img src="https://i.ibb.co.com/3YDsvx2/logo-eco-tp.png" alt="Ecommerce" width="200"></a>
   <br>
   ECO-mmerce
   <br>
@@ -17,7 +17,7 @@
   <a href="#mobile-development-contributors">Contributors</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+[//]: # (![screenshot]&#40;https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif&#41;)
 
 ## Key Features
 
