@@ -28,14 +28,14 @@
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Android Studio](https://developer.android.com/studio?gad_source=1&gclid=Cj0KCQjwvb-zBhCmARIsAAfUI2v0QVmRWMyuxTnFood88o43crZ7EkPbukELkl7exYCzYQsTFQ7BfBoaAoPNEALw_wcB&gclsrc=aw.ds)installed on your computer. From your android studio terminal:
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Android Studio](https://developer.android.com/studio?gad_source=1&gclid=Cj0KCQjwvb-zBhCmARIsAAfUI2v0QVmRWMyuxTnFood88o43crZ7EkPbukELkl7exYCzYQsTFQ7BfBoaAoPNEALw_wcB&gclsrc=aw.ds) installed on your computer. From your android studio terminal:
 
 ```bash
 # Clone this repository
 $ git clone https://github.com/fabs90/ECO-mmerce.git
 ```
-Then open it in Android studio, but before you can run it in your Computer, you have to change the web client_id key in WelcomeActivity.kt line 90. The code is used to access authentication using Google.
-If everything is fine then run the application by click  `Run ‘App’`.
+- Then open it in Android studio, but before you can run it in your Computer, you have to change the web client_id key in WelcomeActivity.kt line 90. The code is used to access authentication using Google.
+- If everything is fine then run the application by click  `Run ‘App’`.
 
 
 ## Emailware
