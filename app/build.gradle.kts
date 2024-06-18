@@ -39,6 +39,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
     buildToolsVersion = "34.0.0"
 }
@@ -52,6 +53,10 @@ dependencies {
     implementation(libs.androidx.gridlayout)
     implementation(libs.firebase.auth)
     implementation(libs.googleid)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,6 +69,10 @@ dependencies {
     
     implementation ("com.google.android.material:material:1.6.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 
 
 }

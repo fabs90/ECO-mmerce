@@ -8,13 +8,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce.R
+import com.example.ecommerce.databinding.ActivityFavoriteBinding
+import com.example.ecommerce.view.adapter.ProductAdapter
+import com.example.ecommerce.view.data.local.FavoriteProductDao
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var favoriteProductDao: FavoriteProductDao
+    private lateinit var favoriteAdapter: ProductAdapter
+    private lateinit var binding: ActivityFavoriteBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +38,32 @@ class FavoriteActivity : AppCompatActivity() {
         }
 
     if(isUserLoggedIn()) {
-
+        //loadFavoriteItems()
+        //setupRecyclerView()
     }
 
     }
+    /*private fun setupRecyclerView() {
+        binding.recyclerViewFavorite.apply {
+            layoutManager = LinearLayoutManager(this@FavoriteActivity)
+            favoriteAdapter = ProductAdapter(this@FavoriteActivity, emptyList()) // Initialize with empty list
+            adapter = favoriteAdapter
+        }
+    }
+
+    private fun loadFavoriteItems() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val favoriteItems = favoriteProductDao.getFavoriteProducts()
+            runOnUiThread {
+                favoriteAdapter.updateProductList(favoriteItems)
+            }
+        }
+    }*/
 
     private fun isUserLoggedIn(): Boolean {
         // Check if the user is logged in via API token
-        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
-        val token = sharedPreferences.getString("login_token", null)
+        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
