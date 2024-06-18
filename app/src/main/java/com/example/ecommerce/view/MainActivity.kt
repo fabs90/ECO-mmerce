@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
                 showLoading(false)
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e(this@MainActivity.localClassName , "Error: ${t.message}")
             }
         })
     }
