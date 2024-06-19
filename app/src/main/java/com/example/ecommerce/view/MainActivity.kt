@@ -67,28 +67,22 @@ class MainActivity : AppCompatActivity() {
                     val inputIds = getInputIdsFromQuery(query)
                     if (inputIds.isNotEmpty()) {
                         val inputIdsFloat = inputIds.map { it.toFloat() }.toFloatArray() // Convert to FloatArray
+                        // Prepare the input tensor as a 2D array [1, inputIdsFloat.size]
                         val inputTensor = arrayOf(inputIdsFloat)
-                        val output = Array(1) { FloatArray(OUTPUT_SIZE) }
+                        val output = FloatArray(OUTPUT_SIZE) // Update: Initialize output as a 1D FloatArray
 
                         Log.e("MainActivity", "Input id Float: ${inputIdsFloat.contentToString()}")
-                        Log.e("MainActivity", "Output shape before inference: ${output.contentDeepToString()}")
+                        Log.e("MainActivity", "Output shape before inference: ${output.contentToString()}")
 
                         try {
-                            // Log the input tensor details
-                            val inputTensorDetails = tfliteInterpreter.getInputTensor(0).shape()
-                            Log.d("MainActivity", "Model expected input shape: ${inputTensorDetails.contentToString()}")
-
-                            // Adjust input tensor shape to match model's expected input shape
-                            val inputShape = intArrayOf(1, inputIdsFloat.size) // Shape [1, N]
-                            Log.d("MainActivity", "Prepared input tensor shape: ${inputShape.contentToString()}")
-
-                            tfliteInterpreter.run(arrayOf(inputIdsFloat), output)
+                            // Run the inference
+                            tfliteInterpreter.run(inputTensor, output) // Update: Pass output directly
 
                             // Log the output tensor shape
-                            Log.d("MainActivity", "Output tensor shape: ${output.size} x ${if (output.isNotEmpty()) output[0].size else 0}")
+                            Log.d("MainActivity", "Output tensor shape: ${output.size}")
 
-                            if (output.isNotEmpty() && output[0].isNotEmpty()) {
-                                displayRecommendations(output[0])
+                            if (output.isNotEmpty()) {
+                                displayRecommendations(output)
                             } else {
                                 Toast.makeText(this@MainActivity, "No recommendations available", Toast.LENGTH_SHORT).show()
                             }
