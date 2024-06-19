@@ -8,17 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityFavoriteBinding
 import com.example.ecommerce.view.adapter.ProductAdapter
 import com.example.ecommerce.view.data.local.FavoriteProductDao
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -71,15 +65,15 @@ class FavoriteActivity : AppCompatActivity() {
 
         return when {
             token != null -> {
-                Log.d("MainActivity", "User logged in with API token")
+                Log.d("com.example.ecommerce.view.MainActivity", "User logged in with API token")
                 true
             }
             firebaseUser != null -> {
-                Log.d("MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
+                Log.d("com.example.ecommerce.view.MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
                 true
             }
             else -> {
-                Log.d("MainActivity", "User not logged in, redirecting to LoginActivity")
+                Log.d("com.example.ecommerce.view.MainActivity", "User not logged in, redirecting to LoginActivity")
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
                 false

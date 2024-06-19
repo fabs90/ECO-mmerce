@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,22 +19,26 @@ import com.example.ecommerce.view.data.api.ProductsItem
 import com.example.ecommerce.view.data.response.ProductsResponse
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import org.tensorflow.lite.Interpreter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.FileInputStream
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 
 class MainActivity : AppCompatActivity() {
 
-    // creating constant keys for shared preferences.
     companion object {
         const val SHARED_PREFS = "shared_prefs"
         const val TOKEN_KEY = "token_key"
+        const val OUTPUT_SIZE = 50 // Adjust according to your model's output size
     }
-
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var productAdapter: ProductAdapter
+    private lateinit var tfliteInterpreter: Interpreter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,25 +54,56 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Load TFLite model
+        tfliteInterpreter = Interpreter(loadModelFile(this, "model_with_metadata.tflite"))
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
-            searchView
-                .editText
-                .setOnEditorActionListener { textView, actionId, event ->
-                    val query = searchView.text.toString()
-                    searchBar.setText(query)
-                    searchView.hide()
-                    if (query.isNotEmpty()) {
-                        val intent = Intent(this@MainActivity, SearchResultActivity::class.java).apply {
-                            putExtra("search_query", query)
+            searchView.editText.setOnEditorActionListener { textView, actionId, event ->
+                val query = searchView.text.toString()
+                searchBar.setText(query)
+                searchView.hide()
+                if (query.isNotEmpty()) {
+                    val inputIds = getInputIdsFromQuery(query)
+                    if (inputIds.isNotEmpty()) {
+                        val inputIdsFloat = inputIds.map { it.toFloat() }.toFloatArray() // Convert to FloatArray
+                        val inputTensor = arrayOf(inputIdsFloat)
+                        val output = Array(1) { FloatArray(OUTPUT_SIZE) }
+
+                        Log.e("MainActivity", "Input id Float: ${inputIdsFloat.contentToString()}")
+                        Log.e("MainActivity", "Output shape before inference: ${output.contentDeepToString()}")
+
+                        try {
+                            // Log the input tensor details
+                            val inputTensorDetails = tfliteInterpreter.getInputTensor(0).shape()
+                            Log.d("MainActivity", "Model expected input shape: ${inputTensorDetails.contentToString()}")
+
+                            // Adjust input tensor shape to match model's expected input shape
+                            val inputShape = intArrayOf(1, inputIdsFloat.size) // Shape [1, N]
+                            Log.d("MainActivity", "Prepared input tensor shape: ${inputShape.contentToString()}")
+
+                            tfliteInterpreter.run(arrayOf(inputIdsFloat), output)
+
+                            // Log the output tensor shape
+                            Log.d("MainActivity", "Output tensor shape: ${output.size} x ${if (output.isNotEmpty()) output[0].size else 0}")
+
+                            if (output.isNotEmpty() && output[0].isNotEmpty()) {
+                                displayRecommendations(output[0])
+                            } else {
+                                Toast.makeText(this@MainActivity, "No recommendations available", Toast.LENGTH_SHORT).show()
+                            }
+                        } catch (e: IllegalArgumentException) {
+                            Log.e("MainActivity", "Error during model inference: ${e.message}")
+                            Toast.makeText(this@MainActivity, "Model inference failed", Toast.LENGTH_SHORT).show()
                         }
-                        startActivity(intent)
                     } else {
-                        Toast.makeText(this@MainActivity, "Search query is empty", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Input data is empty after preprocessing", Toast.LENGTH_SHORT).show()
                     }
-                    false
+                } else {
+                    Toast.makeText(this@MainActivity, "Search query is empty", Toast.LENGTH_SHORT).show()
                 }
+                false
+            }
         }
 
         // Check login status and handle redirection
@@ -80,12 +114,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getInputIdsFromQuery(query: String): IntArray {
+        Log.e("MainActivity", "Original query: $query")
+        val inputIds = query.split(" ").map { it.hashCode() }.toIntArray()
+        Log.e("MainActivity", "Processed input IDs: ${inputIds.joinToString(", ")}")
+        return inputIds
+    }
+
+    private fun displayRecommendations(output: FloatArray) {
+        // Implement logic to display recommendations based on model output
+        Log.e("MainActivity", "Recommendations: ${output.contentToString()}")
+        val recommendedProducts = getRecommendedProducts(output)
+        productAdapter.updateProductList(recommendedProducts)
+    }
+
+    private fun getRecommendedProducts(output: FloatArray): List<ProductsItem> {
+        // Implement logic to get products based on recommendation scores
+        // This is a simple example; adjust to your needs
+        return listOf() // Replace with actual products based on output
+    }
+
     private fun isUserLoggedIn(): Boolean {
-        // Check if the user is logged in via API token
         val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         val token = sharedPreferences.getString(TOKEN_KEY, null)
-
-        // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
         val firebaseUser = auth.currentUser
 
@@ -94,12 +145,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("MainActivity", "User logged in with API token")
                 true
             }
-
             firebaseUser != null -> {
                 Log.d("MainActivity", "User logged in with Firebase: ${firebaseUser.email}")
                 true
             }
-
             else -> {
                 Log.d("MainActivity", "User not logged in, redirecting to LoginActivity")
                 startActivity(Intent(this, LoginActivity::class.java))
@@ -110,7 +159,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // Logic for setting up the bottom navigation
         val navView: BottomNavigationView = binding.bottomNavigation
         navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -118,21 +166,18 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity", "Home selected")
                     true
                 }
-
                 R.id.navigation_profile -> {
                     Log.d("MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
-
                 R.id.navigation_favorite -> {
                     Log.d("MainActivity", "Favorite selected")
                     val intent = Intent(this, FavoriteActivity::class.java)
                     startActivity(intent)
                     true
                 }
-
                 else -> {
                     false
                 }
@@ -152,7 +197,6 @@ class MainActivity : AppCompatActivity() {
             adapter = productAdapter
         }
     }
-
 
     private fun getAllProducts() {
         val call = ApiConfig.apiService().getProducts()
@@ -178,4 +222,12 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 
+    fun loadModelFile(context: Context, modelName: String): MappedByteBuffer {
+        val fileDescriptor = context.assets.openFd(modelName)
+        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+        val fileChannel = inputStream.channel
+        val startOffset = fileDescriptor.startOffset
+        val declaredLength = fileDescriptor.declaredLength
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+    }
 }
