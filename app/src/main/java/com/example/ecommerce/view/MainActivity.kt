@@ -29,11 +29,15 @@ import java.nio.channels.FileChannel
 
 class MainActivity : AppCompatActivity() {
 
+    // creating constant keys for shared preferences.
     companion object {
         const val SHARED_PREFS = "shared_prefs"
         const val TOKEN_KEY = "token_key"
         const val OUTPUT_SIZE = 50 // Adjust according to your model's output size
+        const val USERNAME_KEY = "username"
+        const val EMAIL_KEY = "email"
     }
+
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
@@ -160,9 +164,23 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity", "Home selected")
                     true
                 }
+
                 R.id.navigation_profile -> {
                     Log.d("MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
+                    val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+                    val email = sharedPreferences.getString(EMAIL_KEY, "N/A")
+
+                    if (auth.currentUser != null) {
+                        // User logged in with Firebase
+                        val firebaseUser = auth.currentUser
+                        intent.putExtra("username", firebaseUser?.displayName ?: "N/A")
+                        intent.putExtra("email", firebaseUser?.email ?: "N/A")
+                    } else {
+                        // User logged in with API token
+                        intent.putExtra("username", email)
+                        intent.putExtra("email", email)
+                    }
                     startActivity(intent)
                     true
                 }
