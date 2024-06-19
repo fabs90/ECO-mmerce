@@ -32,6 +32,7 @@ class ProfileActivity : AppCompatActivity() {
 
         // Check login status and handle redirection
         if (isUserLoggedIn()) {
+            updateProfileDetails()
             binding.btnSignOut.setOnClickListener {
                 // Handle sign out logic here
                 if(isFirebase == true){
@@ -69,6 +70,22 @@ class ProfileActivity : AppCompatActivity() {
                 finish()
                 false
             }
+        }
+    }
+
+    private fun updateProfileDetails() {
+        if (isFirebase) {
+            val firebaseUser = auth.currentUser
+            firebaseUser?.let {
+                binding.textViewProfilename.text = it.displayName ?: "N/A"
+                binding.textViewProfileEmail.text = it.email ?: "N/A"
+            }
+        } else {
+            val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+            val email = sharedPreferences.getString(MainActivity.EMAIL_KEY, "N/A")
+
+            binding.textViewProfilename.text = email
+            binding.textViewProfileEmail.text = email
         }
     }
 

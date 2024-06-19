@@ -18,10 +18,7 @@
         <activity
             android:name=".view.ProfileActivity"
             android:exported="false" />
-<<<<<<< HEAD
 
-=======
->>>>>>> 0adf423128fd30523f4aa8d47114358bc21f5454
         <activity
             android:name=".view.SearchResultActivity"
             android:exported="false" />
@@ -60,14 +57,7 @@
 
         <activity
             android:name=".view.MainActivity"
-<<<<<<< HEAD
             android:exported="true" />
 
     </application>
 </manifest>
-=======
-            android:exported="false" />
-    </application>
-
-</manifest>
->>>>>>> 0adf423128fd30523f4aa8d47114358bc21f5454

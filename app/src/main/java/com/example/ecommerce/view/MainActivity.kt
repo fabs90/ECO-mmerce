@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val SHARED_PREFS = "shared_prefs"
         const val TOKEN_KEY = "token_key"
+        const val USERNAME_KEY = "username"
+        const val EMAIL_KEY = "email"
     }
 
 
@@ -122,6 +124,19 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_profile -> {
                     Log.d("MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
+                    val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+                    val email = sharedPreferences.getString(EMAIL_KEY, "N/A")
+
+                    if (auth.currentUser != null) {
+                        // User logged in with Firebase
+                        val firebaseUser = auth.currentUser
+                        intent.putExtra("username", firebaseUser?.displayName ?: "N/A")
+                        intent.putExtra("email", firebaseUser?.email ?: "N/A")
+                    } else {
+                        // User logged in with API token
+                        intent.putExtra("username", email)
+                        intent.putExtra("email", email)
+                    }
                     startActivity(intent)
                     true
                 }
