@@ -2,12 +2,10 @@ package com.example.ecommerce.view
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -73,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         if (loginResponse.status == "successful") {
-                            // Save token if needed and navigate to MainActivity
+                            // Save token if needed and navigate to com.example.ecommerce.view.MainActivity
 
 //                        Log.d("LoginActivity", "Login response received: ${loginResponse.status}")
 //                        Log.d("LoginActivity", "Token saved: ${loginResponse.token}")
@@ -103,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                                     "LoginActivity",
                                     "Login not successful: ${loginResponse.status}"
                                 )
+                                Toast.makeText(this@LoginActivity, "Incorrect Password", Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             //Log.d("LoginActivity", "Empty response body")
@@ -114,14 +113,11 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         //Log.e("LoginActivity", "Login Response: ${response.message()}")
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Login failed with response code: ${response.code()} - ${response.message()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@LoginActivity, "Incorrect Password", Toast.LENGTH_SHORT).show()
                     }
+                } else {
+                    Toast.makeText(this@LoginActivity, "Incorrect Password", Toast.LENGTH_SHORT).show()
                 }
-
 
             }
 

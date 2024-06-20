@@ -8,12 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.credentials.ClearCredentialStateRequest
-import androidx.credentials.CredentialManager
-import androidx.lifecycle.lifecycleScope
 import com.example.ecommerce.databinding.ActivityProfileBinding
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.launch
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding

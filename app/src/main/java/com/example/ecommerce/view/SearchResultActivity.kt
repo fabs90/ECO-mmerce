@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivitySearchResultBinding
@@ -74,21 +71,21 @@ class SearchResultActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    Log.d("MainActivity", "Home selected")
+                    Log.d("com.example.ecommerce.view.MainActivity", "Home selected")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     true
                 }
 
                 R.id.navigation_profile -> {
-                    Log.d("MainActivity", "Profile selected")
+                    Log.d("com.example.ecommerce.view.MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
 
                 R.id.navigation_favorite -> {
-                    Log.d("MainActivity", "Favorite selected")
+                    Log.d("com.example.ecommerce.view.MainActivity", "Favorite selected")
                     val intent = Intent(this, FavoriteActivity::class.java)
                     startActivity(intent)
                     true
