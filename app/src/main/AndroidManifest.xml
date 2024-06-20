@@ -14,49 +14,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECOmmerce"
         tools:targetApi="31">
-
+        <activity
+            android:name=".view.RecommendActivity"
+            android:exported="false" />
         <activity
             android:name=".view.ProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.SearchResultActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.favorite.FavoriteActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.WelcomeActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.LoginActivity"
             android:exported="true" />
-
         <activity
             android:name=".view.CartActivity"
             android:exported="false" />
-
         <activity android:name=".view.detail.DetailActivity" />
-
-        <activity android:name=".view.MainActivity"
-            android:exported="false"
-            />
-
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
