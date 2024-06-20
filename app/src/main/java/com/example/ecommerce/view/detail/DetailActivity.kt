@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
@@ -20,7 +21,7 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
-private var isChecked = false
+    private var isChecked = false
     private var currentProduct: ProductsItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +30,6 @@ private var isChecked = false
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      //  favoriteProductDao = FavoriteDatabase.getDatabase(this).favoriteProductDao()
-       // sharedPreferences = getSharedPreferences("FavoriteItems", MODE_PRIVATE)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -39,22 +38,26 @@ private var isChecked = false
 
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
 
-
         val productId = intent.getStringExtra("product_id")
         if (productId != null) {
-            // Fetch and display product details using the productId
             fetchProductDetails(productId)
         }
+
+        // check if product is loved
+        viewModel.isFavorite.observe(this, Observer { favorite ->
+            isChecked = favorite
+            updateFavoriteIcon()
+        })
 
         binding.favoriteBtn.setOnClickListener {
             isChecked = !isChecked
             currentProduct?.let { product ->
                 if (isChecked) {
-                    viewModel.addToFavorite(product.id, product.image, product.name, product.description)
-                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    viewModel.addToFavorite(product.image, product.name, product.description)
+                    Toast.makeText(this, "${product.name} Added to favorites", Toast.LENGTH_SHORT).show()
                 } else {
-                    viewModel.removeFromFavorite(product.id)
-                    Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                    viewModel.removeFromFavorite(product.name)
+                    Toast.makeText(this, "${product.name} Removed from favorites", Toast.LENGTH_SHORT).show()
                 }
                 updateFavoriteIcon()
             }
@@ -68,9 +71,9 @@ private var isChecked = false
                 if (response.isSuccessful) {
                     val product = response.body()?.products?.find { it.id == productId }
                     if (product != null) {
-                       displayProductDetails(product)
+                        displayProductDetails(product)
                         currentProduct = product
-
+                        viewModel.checkProduct(product.name)
                     }
                 } else {
                     Toast.makeText(this@DetailActivity, "Failed to load product details", Toast.LENGTH_SHORT).show()
@@ -83,16 +86,15 @@ private var isChecked = false
         })
     }
 
-   private fun displayProductDetails(product: ProductsItem) {
-       binding.apply {
-           Glide.with(this@DetailActivity)
-               .load(product.image)
-               .into(imageView3)
-           detailTitleTv.text = product.name
-          // detailPriceTv.text = product.price.toString()
-           descriptionTv.text = product.description
-       }
-   }
+    private fun displayProductDetails(product: ProductsItem) {
+        binding.apply {
+            Glide.with(this@DetailActivity)
+                .load(product.image)
+                .into(imageView3)
+            detailTitleTv.text = product.name
+            descriptionTv.text = product.description
+        }
+    }
 
     private fun updateFavoriteIcon() {
         binding.favoriteBtn.setImageResource(if (isChecked) R.drawable.ic_heart_red else R.drawable.ic_favorite)
@@ -100,5 +102,5 @@ private var isChecked = false
 
     companion object {
         const val EXTRA_PRODUCT = "product_id"
-   }
+    }
 }

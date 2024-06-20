@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ecommerce.R
+import com.example.ecommerce.data.FavoriteProductDao
 import com.example.ecommerce.databinding.ActivityFavoriteBinding
 import com.example.ecommerce.view.LoginActivity
 import com.example.ecommerce.view.MainActivity
 import com.example.ecommerce.view.adapter.ProductAdapter
-import com.example.ecommerce.view.data.local.FavoriteProductDao
 import com.google.firebase.auth.FirebaseAuth
 
 class FavoriteActivity : AppCompatActivity() {

@@ -1,7 +1,10 @@
 package com.example.ecommerce.view.detail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.ecommerce.data.FavoriteProduct
 import com.example.ecommerce.data.FavoriteProductDao
 import com.example.ecommerce.data.ProductDatabase
@@ -9,32 +12,58 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailViewModel(application: Application) :  AndroidViewModel(application) {
+class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private var productDao: FavoriteProductDao?
-    private var productDb : ProductDatabase? = ProductDatabase.getDatabase(application)
+    private var productDb: ProductDatabase? = ProductDatabase.getDatabase(application)
 
-    init{
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> get() = _isFavorite
+
+    init {
         productDao = productDb?.favoriteUserDao()
     }
 
-    fun addToFavorite(id: String, image: String, name: String, description: String){
+    fun addToFavorite(image: String, name: String, description: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val product = FavoriteProduct(
-                id,
-                image,
-                name,
-                description,
-            )
-            productDao?.addToFavorite(product)
+            try {
+                Log.d("DetailViewModel", "Adding to favorite: $name")
+                val product = FavoriteProduct(
+                    image = image,
+                    name = name,
+                    description = description,
+                )
+                productDao?.addToFavorite(product)
+                _isFavorite.postValue(true)
+                Log.d("DetailViewModel", "Successfully added to favorite: $name")
+            } catch (e: Exception) {
+                Log.e("DetailViewModel", "Error adding to favorite: ${e.message}")
+            }
         }
     }
 
-    suspend fun checkProduct(id : String) = productDao?.checkProduct(id)
-
-    fun removeFromFavorite(id : String){
+    fun checkProduct(name: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            productDao?.removeFromFavorite(id)
+            try {
+                val count = productDao?.checkProduct(name) ?: 0
+                _isFavorite.postValue(count > 0)
+            } catch (e: Exception) {
+                Log.e("DetailViewModel", "Error checking product: ${e.message}")
+                _isFavorite.postValue(false)
+            }
+        }
+    }
+
+    fun removeFromFavorite(name: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Log.d("DetailViewModel", "Removing from favorite: $name")
+                productDao?.removeFromFavorite(name)
+                _isFavorite.postValue(false)
+                Log.d("DetailViewModel", "Successfully removed from favorite: $name")
+            } catch (e: Exception) {
+                Log.e("DetailViewModel", "Error removing from favorite: ${e.message}")
+            }
         }
     }
 }
