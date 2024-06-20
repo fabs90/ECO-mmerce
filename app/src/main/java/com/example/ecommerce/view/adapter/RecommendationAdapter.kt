@@ -13,8 +13,9 @@ import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ItemRecommendationBinding
 import com.example.ecommerce.view.data.response.RecommendResponse
 
-class RecommendationAdapter(private val recommendations: List<RecommendResponse>) :
-    RecyclerView.Adapter<RecommendationAdapter.RecommendationViewHolder>() {
+class RecommendationAdapter(
+    private var recommendations: List<RecommendResponse>
+) : RecyclerView.Adapter<RecommendationAdapter.RecommendationViewHolder>() {
 
     class RecommendationViewHolder(val binding: ItemRecommendationBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,18 +27,26 @@ class RecommendationAdapter(private val recommendations: List<RecommendResponse>
 
     override fun onBindViewHolder(holder: RecommendationViewHolder, position: Int) {
         val recommendation = recommendations[position]
-        holder.binding.productName.text = recommendation.product_name
-        holder.binding.productPrice.text = recommendation.product_price
-        Glide.with(holder.binding.productImage.context)
-            .load(recommendation.product_image)
-            .into(holder.binding.productImage)
+        holder.binding.apply {
+            productName.text = recommendation.product_name
+            productPrice.text = recommendation.product_price
+            Glide.with(productImage.context)
+                .load(recommendation.product_image)
+                .error(R.drawable.ic_broken) // Placeholder for error
+                .into(productImage)
+        }
 
         holder.binding.root.setOnClickListener {
-            val context = holder.binding.root.context
+            val context = it.context
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(recommendation.product_url))
             context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int = recommendations.size
+
+    fun updateRecommendationList(newRecommendationList: List<RecommendResponse>) {
+        recommendations = newRecommendationList
+        notifyDataSetChanged()
+    }
 }

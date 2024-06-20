@@ -114,7 +114,7 @@ class FavoriteActivity : AppCompatActivity() {
         showLoading(false)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("product_id", product.id)
+            intent.putExtra("product_id", product.id.toString())
             startActivity(intent)
         }
         binding.recyclerViewFavorite.apply {

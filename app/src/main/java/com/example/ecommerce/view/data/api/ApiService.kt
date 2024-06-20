@@ -21,7 +21,7 @@ interface ApiService {
     fun getProducts(): Call<ProductsResponse>
 
     @GET("recommend?input_ids=")
-    fun getRecommend(): Call<RecommendResponse>
+    fun getRecommend(): Call<List<RecommendResponse>>
 }
 
 data class LoginRequest(
