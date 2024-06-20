@@ -56,9 +56,15 @@ This software uses the following open source packages:
 - [Android Studio](https://developer.android.com/studio)
 
 
-## Mobile Development Contributors
-
-> GitHub [@fabs90](https://github.com/fabs90) &nbsp;&middot;&nbsp; GitHub [@GitElang](https://github.com/GitElang) &nbsp;&middot;&nbsp;
-> Instagram [@fabianjc.jpeg](https://www.instagram.com/fabianjc.jpeg/) &nbsp;&middot;&nbsp; Instagram [@elang.fdllh](https://www.instagram.com/elang,fdllh/) 
+## Team Members
+| Bangkit ID   | Name                      | Learning Path | Contact Link                                                                 |
+|--------------|---------------------------|---------------|------------------------------------------------------------------------------|
+| M009D4KY1738 | Erik Pontian Simanjuntak  | ML            | [LinkedIn](https://www.linkedin.com/in/erik-pontian-s-3a162a2ba/)            |
+| M005D4KY2757 | Nicholas Baron Bramantyo  | ML            | [LinkedIn](https://www.linkedin.com/in/nicholasbaronbramantyo/)              |
+| M010D4KY2917 | Daniel Valerian Depari    | ML            | [LinkedIn](https://www.linkedin.com/in/daniel-valerian-depari-459375202/)    |
+| C008D4KY0555 | Aziz Hidayat              | CC            | [LinkedIn](https://www.linkedin.com/in/aziz-hidayat-200793301/)              |
+| C010D4KY0599 | Muhammad Farrel Mirawan   | CC            | [LinkedIn](https://www.linkedin.com/in/farrel-mirawan)                       |
+| A009D4KY4064 | Elang Fadillah            | MD            | [LinkedIn](https://www.linkedin.com/in/elang-fadillah-b36b66278/)            |
+| A009D4KY4445 | Fabian Juliansyah Cahyadi | MD            | [LinkedIn](https://www.linkedin.com/in/fabian-juliansyah-cahyadi-0ab68a292/) |
 
 
