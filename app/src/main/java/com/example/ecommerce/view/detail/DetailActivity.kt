@@ -1,36 +1,27 @@
-package com.example.ecommerce.view
+package com.example.ecommerce.view.detail
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ActivityDetailBinding
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.ProductsItem
-import com.example.ecommerce.view.data.local.FavoriteDatabase
-import com.example.ecommerce.view.data.local.FavoriteProduct
-import com.example.ecommerce.view.data.local.FavoriteProductDao
 import com.example.ecommerce.view.data.response.ProductsResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
-    private var isFavorite = false
-    private lateinit var product: ProductsItem
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var favoriteProductDao: FavoriteProductDao
+    private lateinit var viewModel: DetailViewModel
+private var isChecked = false
+    private var currentProduct: ProductsItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +37,28 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
+        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+
+
         val productId = intent.getStringExtra("product_id")
         if (productId != null) {
             // Fetch and display product details using the productId
             fetchProductDetails(productId)
         }
-        //setupFavoriteButton()
-        //setupAddToCartButton()
+
+        binding.favoriteBtn.setOnClickListener {
+            isChecked = !isChecked
+            currentProduct?.let { product ->
+                if (isChecked) {
+                    viewModel.addToFavorite(product.id, product.image, product.name, product.description)
+                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.removeFromFavorite(product.id)
+                    Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                }
+                updateFavoriteIcon()
+            }
+        }
     }
 
     private fun fetchProductDetails(productId: String) {
@@ -63,6 +69,8 @@ class DetailActivity : AppCompatActivity() {
                     val product = response.body()?.products?.find { it.id == productId }
                     if (product != null) {
                        displayProductDetails(product)
+                        currentProduct = product
+
                     }
                 } else {
                     Toast.makeText(this@DetailActivity, "Failed to load product details", Toast.LENGTH_SHORT).show()
@@ -85,45 +93,10 @@ class DetailActivity : AppCompatActivity() {
            descriptionTv.text = product.description
        }
    }
-  /*  private fun setupFavoriteButton() {
-        val favoriteButton: ImageButton = binding.favoriteBtn
-        updateFavoriteButtonState()
 
-        favoriteButton.setOnClickListener {
-            isFavorite = !isFavorite
-            updateFavoriteButtonState()
-
-            // Save the favorite status to SharedPreferences and Room database
-            CoroutineScope(Dispatchers.IO).launch {
-                if (isFavorite) {
-                    sharedPreferences.edit().putBoolean("favorite_${product.id}", true).apply()
-                    favoriteProductDao.addFavoriteProduct(
-                        FavoriteProduct(
-                            productId = product.id,
-                            name = product.name,
-                            price = product.price.toDouble(),
-                            image = product.image
-                        )
-                    )
-                } else {
-                    sharedPreferences.edit().putBoolean("favorite_${product.id}", false).apply()
-                    favoriteProductDao.removeFavoriteProduct(product.id)
-                }
-            }
-        }
+    private fun updateFavoriteIcon() {
+        binding.favoriteBtn.setImageResource(if (isChecked) R.drawable.ic_heart_red else R.drawable.ic_favorite)
     }
-
-    private fun updateFavoriteButtonState() {
-        val favoriteButton: ImageButton = binding.favoriteBtn
-        if (isFavorite) {
-            favoriteButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red_main))
-        } else {
-            favoriteButton.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
-        }
-    }
-    private fun checkIfFavorite(productId: String): Boolean {
-        return sharedPreferences.getBoolean("favorite_$productId", false)
-    }*/
 
     companion object {
         const val EXTRA_PRODUCT = "product_id"

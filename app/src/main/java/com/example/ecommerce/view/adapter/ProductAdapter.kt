@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ItemProductBinding
-import com.example.ecommerce.view.DetailActivity
+import com.example.ecommerce.view.detail.DetailActivity
 import com.example.ecommerce.view.data.api.ProductsItem
 
 class ProductAdapter(

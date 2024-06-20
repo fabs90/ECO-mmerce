@@ -17,6 +17,8 @@ import com.example.ecommerce.view.adapter.ProductAdapter
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.ProductsItem
 import com.example.ecommerce.view.data.response.ProductsResponse
+import com.example.ecommerce.view.detail.DetailActivity
+import com.example.ecommerce.view.favorite.FavoriteActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.tensorflow.lite.Interpreter

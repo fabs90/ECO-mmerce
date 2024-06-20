@@ -4,9 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.ecommerce.data.FavoriteProductDao
 
 @Dao
-interface FavoriteProductDao {
+interface FavoriteProductDao : FavoriteProductDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFavoriteProduct(product: FavoriteProduct)
@@ -18,5 +19,5 @@ interface FavoriteProductDao {
     suspend fun removeFavoriteProduct(productId: String)
 
     @Query("SELECT COUNT(*) FROM favorite_product WHERE productId = :productId")
-    suspend fun checkIfFavorite(productId: String): Int
+    suspend fun checkfFavorite(productId: String): Int
 }

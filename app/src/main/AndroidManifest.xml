@@ -24,7 +24,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".view.FavoriteActivity"
+            android:name=".view.favorite.FavoriteActivity"
             android:exported="false" />
 
         <activity
@@ -43,7 +43,7 @@
             android:name=".view.CartActivity"
             android:exported="false" />
 
-        <activity android:name=".view.DetailActivity" />
+        <activity android:name=".view.detail.DetailActivity" />
 
         <activity android:name=".view.MainActivity"
             android:exported="false"
