@@ -44,11 +44,9 @@
             android:exported="false" />
 
         <activity android:name=".view.detail.DetailActivity" />
-
-        <activity android:name=".view.MainActivity"
-            android:exported="false"
-            />
-
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true"

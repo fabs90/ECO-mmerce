@@ -3,6 +3,7 @@ package com.example.ecommerce.view.data.api
 import com.example.ecommerce.view.data.response.CreatedAt
 import com.example.ecommerce.view.data.response.LoginResponse
 import com.example.ecommerce.view.data.response.ProductsResponse
+import com.example.ecommerce.view.data.response.RecommendResponse
 import com.example.ecommerce.view.data.response.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -18,6 +19,9 @@ interface ApiService {
 
     @GET("products")
     fun getProducts(): Call<ProductsResponse>
+
+    @GET("recommend?input_ids=")
+    fun getRecommend(): Call<RecommendResponse>
 }
 
 data class LoginRequest(
