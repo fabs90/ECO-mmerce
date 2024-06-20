@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce.R
 import com.example.ecommerce.data.FavoriteProduct
@@ -109,18 +110,19 @@ class FavoriteActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun setupRecyclerView() {
+        showLoading(false)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
+            intent.putExtra("product_id", product.id)
             startActivity(intent)
         }
         binding.recyclerViewFavorite.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
-            adapter = this@FavoriteActivity.favoriteAdapter
+            adapter = favoriteAdapter
         }
     }
+
 
     private fun setupViewModel() {
         viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)

@@ -1,6 +1,7 @@
 package com.example.ecommerce.view.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
 
         val productId = intent.getStringExtra("product_id")
+        Log.e(this.toString(),"Product Id : $productId")
         if (productId != null) {
             fetchProductDetails(productId)
         }
