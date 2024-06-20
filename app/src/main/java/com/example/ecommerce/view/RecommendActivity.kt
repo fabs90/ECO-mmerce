@@ -1,6 +1,7 @@
 package com.example.ecommerce.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -45,8 +46,12 @@ class RecommendActivity : AppCompatActivity() {
             )
         )
 
-
+        showLoading(false)
         adapter = RecommendationAdapter(recommendations)
         binding.gridProduct.adapter = adapter
+    }
+
+    private fun showLoading(status: Boolean) {
+        binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 }
