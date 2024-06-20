@@ -149,7 +149,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-
                 else -> {
                     false
                 }
@@ -195,4 +194,10 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 
+    // Agar focus bottom navbar tetap di home
+    override fun onResume() {
+        super.onResume()
+        val navView: BottomNavigationView = binding.bottomNavigation
+        navView.selectedItemId = R.id.navigation_home
+    }
 }

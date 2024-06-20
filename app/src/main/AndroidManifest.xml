@@ -23,9 +23,9 @@
             android:name=".view.SearchResultActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".view.favorite.FavoriteActivity"
-            android:exported="false" />
+        <activity android:name=".view.favorite.FavoriteActivity"
+            android:exported="false"
+            />
 
         <activity
             android:name=".view.RegisterActivity"
