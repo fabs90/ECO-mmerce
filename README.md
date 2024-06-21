@@ -1,7 +1,6 @@
 
 # ECO-mmerce
 ## Cloud Computing Branch 
-Made by Farrel & Aziz
 This branch focuses on the Cloud Computing aspect of our application. We have developed backend endpoints for integration with mobile development and created the necessary cloud configurations for deployment on Google Cloud.
 ### 💻 Tech Stack
 - Java (Node JS)
@@ -45,5 +44,11 @@ Google App Engine is a fully managed platform that allows the building and deplo
 
 ### ⬆️ Endpoint Routes
 ![image](https://github.com/fabs90/ECO-mmerce/assets/87571919/fa6a22f2-0aaf-427b-9fe5-6aa62d9a502e)
+
 ### 🔗 Deployment Link
 https://eco-mmerce-cloud.et.r.appspot.com 
+
+### ⚡ Contributors
+- Muhammad Farrel Mirawan
+- Aziz Hidayat
+
