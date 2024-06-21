@@ -42,7 +42,7 @@ class FavoriteAdapter(
                 .error(R.drawable.ic_broken) // Add an error placeholder
                 .into(imageView)
 
-            binding.root.setOnClickListener {
+            binding.productCard.setOnClickListener {
                 val intent = Intent(context, DetailActivity::class.java).apply {
                     putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
                 }
