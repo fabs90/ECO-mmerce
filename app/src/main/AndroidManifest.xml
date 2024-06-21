@@ -26,10 +26,6 @@
         <activity android:name=".view.favorite.FavoriteActivity"
             android:exported="false"
             />
-        <activity android:name=".view.RecommendActivity"
-            android:exported="false"
-            />
-
         <activity
             android:name=".view.RegisterActivity"
             android:exported="false" />
@@ -46,7 +42,10 @@
             android:name=".view.CartActivity"
             android:exported="false" />
 
-        <activity android:name=".view.detail.DetailActivity" />
+        <activity android:name=".view.detail.DetailActivity"
+            android:exported="false"
+            />
+        
         <activity
             android:name=".view.MainActivity"
             android:exported="false" />
