@@ -20,7 +20,12 @@
 ## Documentation
 <h3>UI/UX Workflow</h3>
 <img src="https://i.ibb.co.com/PtLYf39/ECO-mmerce-Flow-Screen-drawio-1.png" alt="UI/UX workflow">
-
+<br>
+<h3>Screenshot</h3>
+<br>
+<h3>Demo Video Link</h3>
+<br>
+<a href="#">demo video</a>
 ## Credits
 
 This software uses the following open source packages:
