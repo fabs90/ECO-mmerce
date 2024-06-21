@@ -36,7 +36,7 @@ This software uses the following open source packages:
 - [FireBase](https://firebase.google.com/)
 - [Retrofit](https://square.github.io/retrofit/)
 - [Android Studio](https://developer.android.com/studio)
-
+- Room
 
 ## Mobile Development Contributors
 
