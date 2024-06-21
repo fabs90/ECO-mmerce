@@ -12,7 +12,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href=#>Documentation</a>
+  <a href=#documentation>Documentation</a>
   <a href="#emailware">Emailware</a> •
   <a href="#credits">Credits</a> •
   <a href="#mobile-development-contributors">Contributors</a>
