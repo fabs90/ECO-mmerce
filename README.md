@@ -26,10 +26,9 @@
 <h3>Demo Video Link</h3>
 <br>
 <a href="#">demo video</a>
+
 ## Credits
-
 This software uses the following open source packages:
-
 
 - [Kotlin](https://kotlinlang.org/)
 - [Figma](https://www.figma.com/)
