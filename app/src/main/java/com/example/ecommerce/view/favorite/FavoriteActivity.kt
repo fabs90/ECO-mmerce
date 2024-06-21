@@ -110,8 +110,9 @@ class FavoriteActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setupRecyclerView() {
-        showLoading(true)
+        showLoading(false)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("product_id", product.id)
@@ -123,9 +124,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupViewModel() {
-        showLoading(false)
         viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
         viewModel.getFavoriteUser()?.observe(this, Observer { favoriteProducts ->
             favoriteProducts?.let {
@@ -136,7 +135,7 @@ class FavoriteActivity : AppCompatActivity() {
                         image = favoriteProduct.image,
                         description = favoriteProduct.description,
                         price = 0,
-                        createdAt = CreatedAt(0,0)
+                        createdAt = CreatedAt(0, 0)
                     )
                 }
                 favoriteAdapter.updateFavoriteList(products)
@@ -154,4 +153,3 @@ class FavoriteActivity : AppCompatActivity() {
         navView.selectedItemId = R.id.navigation_favorite
     }
 }
-
