@@ -39,7 +39,7 @@ $ git clone https://github.com/fabs90/ECO-mmerce.git
 - If everything is fine then run the application by click  `Run ‘App’`.
 
 ## Documentation
-- [ML Documentation](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+- [ML Documentation](https://github.com/fabs90/ECO-mmerce/tree/ML)
 - [CC Documentation](https://github.com/fabs90/ECO-mmerce/tree/Cloud)
 - [MD Documentation](https://github.com/fabs90/ECO-mmerce/tree/MD)
 
