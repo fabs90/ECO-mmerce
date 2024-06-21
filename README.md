@@ -22,6 +22,9 @@
 <img src="https://i.ibb.co.com/PtLYf39/ECO-mmerce-Flow-Screen-drawio-1.png" alt="UI/UX workflow">
 <br>
 <h3>Screenshot</h3>
+<img src="https://i.ibb.co.com/zfL2pKh/Screenshot-287.png" alt="screenshot1">
+<br>
+<img src="https://i.ibb.co.com/9ZnjJhm/Screenshot-288.png" alt="screenshot2">
 <br>
 <h3>Demo Video Link</h3>
 <br>
