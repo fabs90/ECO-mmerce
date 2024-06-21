@@ -81,9 +81,7 @@ class FavoriteActivity : AppCompatActivity() {
                     startActivity(Intent(this@FavoriteActivity, MainActivity::class.java))
                     true
                 }
-
                 R.id.navigation_profile -> {
-                    Log.d("MainActivity", "Profile selected")
                     val intent = Intent(this, ProfileActivity::class.java)
                     val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
                     val email = sharedPreferences.getString(EMAIL_KEY, "N/A")
@@ -99,20 +97,20 @@ class FavoriteActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-
                 R.id.navigation_favorite -> {
-                    false
+                    true
                 }
-
                 else -> {
                     false
                 }
             }
         }
+        // Set selected item to navigation_favorite
+        navView.selectedItemId = R.id.navigation_favorite
     }
 
     private fun setupRecyclerView() {
-        showLoading(false)
+        showLoading(true)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("product_id", product.id)
@@ -139,6 +137,7 @@ class FavoriteActivity : AppCompatActivity() {
                     )
                 }
                 favoriteAdapter.updateFavoriteList(products)
+                showLoading(false)
             }
         })
     }
