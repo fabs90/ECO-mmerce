@@ -41,7 +41,7 @@ $ git clone https://github.com/fabs90/ECO-mmerce.git
 ## Documentation
 - [ML Documentation](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
 - [CC Documentation](https://github.com/fabs90/ECO-mmerce/tree/Cloud)
-- [MD Documentation](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+- [MD Documentation](https://github.com/fabs90/ECO-mmerce/tree/MD)
 
 ## Emailware
 
