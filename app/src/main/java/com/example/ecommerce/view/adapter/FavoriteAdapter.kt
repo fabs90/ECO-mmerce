@@ -27,7 +27,6 @@ class FavoriteAdapter(
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         val imageView: ImageView = binding.productImage
         val nameTextView: TextView = binding.productName
-        val priceTextView: TextView = binding.productPrice
 
         init {
             binding.root.setOnClickListener {
@@ -37,7 +36,6 @@ class FavoriteAdapter(
 
         fun bind(favorite: ProductsItem) {
             nameTextView.text = favorite.name
-            priceTextView.text = "Rp.${favorite.price}"
 
             Glide.with(context)
                 .load(favorite.image)
@@ -66,7 +64,6 @@ class FavoriteAdapter(
         holder.bind(favoriteList[position])
         val favorite = favoriteList[position]
         holder.nameTextView.text = favorite.name
-        holder.priceTextView.text = "Rp.${favorite.price.toString()}"
 
         Log.d("FavoriteAdapter", "Loading image: ${favorite.image}")
         Glide.with(context)

@@ -78,7 +78,7 @@ class FavoriteActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    Log.d("MainActivity", "Home selected")
+                    startActivity(Intent(this@FavoriteActivity, MainActivity::class.java))
                     true
                 }
 

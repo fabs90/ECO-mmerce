@@ -55,11 +55,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val textHyperLink: TextView = findViewById(R.id.recommendHyperLink)
-        textHyperLink.setOnClickListener {
-            startActivity(Intent(this, RecommendActivity::class.java))
-        }
-
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
