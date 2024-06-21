@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ItemFavoriteBinding
-import com.example.ecommerce.view.detail.DetailActivity
 import com.example.ecommerce.view.data.api.ProductsItem
+import com.example.ecommerce.view.detail.DetailActivity
 
 class FavoriteAdapter(
     private val context: Context,
@@ -28,26 +27,13 @@ class FavoriteAdapter(
         private val binding = ItemFavoriteBinding.bind(view)
         val imageView: ImageView = binding.productImage
         val nameTextView: TextView = binding.productName
-<<<<<<< HEAD
 
         fun bind(favorite: ProductsItem) {
             nameTextView.text = favorite.name
-=======
-        //val priceTextView: TextView = binding.productPrice
-        init {
-            view.setOnClickListener {
-                onItemClick(favoriteList[adapterPosition])
-            }
-        }
-
-        fun bind(favorite: ProductsItem) {
-            nameTextView.text = favorite.name
-           // priceTextView.text = "Rp.${favorite.price}"
+            // Optional: priceTextView.text = "Rp.${favorite.price}"
 
             Log.d("FavoriteAdapter", "Loading image: ${favorite.image}")
 
-
->>>>>>> 205ad44c61b5682516ed15425aec1ea0d6145c99
             Glide.with(context)
                 .load(favorite.image)
                 .error(R.drawable.ic_broken) // Add an error placeholder
@@ -57,7 +43,7 @@ class FavoriteAdapter(
                 val intent = Intent(context, DetailActivity::class.java).apply {
                     putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
                 }
-                Log.e("FavoriteAdapter", "Navigating to detail with data: $favorite")
+                Log.d("FavoriteAdapter", "Navigating to detail with data: $favorite")
                 context.startActivity(
                     intent,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
@@ -84,4 +70,3 @@ class FavoriteAdapter(
         notifyDataSetChanged()
     }
 }
-
