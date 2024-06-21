@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -40,14 +41,17 @@ class FavoriteAdapter(
                 .into(imageView)
 
             binding.root.setOnClickListener {
-                val intent = Intent(context, DetailActivity::class.java).apply {
-                    putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
-                }
-                Log.d("FavoriteAdapter", "Navigating to detail with data: $favorite")
-                context.startActivity(
-                    intent,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
-                )
+//                val intent = Intent(context, DetailActivity::class.java).apply {
+//                    putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
+//                }
+//                Log.d("FavoriteAdapter", "Navigating to detail with data: $favorite")
+//                context.startActivity(
+//                    intent,
+//                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
+//                )
+//            }
+                Toast.makeText(context, "${favorite.name} is favorite!", Toast.LENGTH_SHORT).show()
+
             }
         }
     }

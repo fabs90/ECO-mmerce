@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -113,9 +114,10 @@ class FavoriteActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         showLoading(true)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
-            startActivity(intent)
+//            val intent = Intent(this, DetailActivity::class.java)
+//            intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
+//            startActivity(intent)
+            Toast.makeText(this,"${product.name} is favorite!",Toast.LENGTH_SHORT).show()
         }
         binding.recyclerViewFavorite.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity,)
