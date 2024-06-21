@@ -38,7 +38,6 @@ class FavoriteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -83,8 +82,8 @@ class FavoriteActivity : AppCompatActivity() {
                 }
                 R.id.navigation_profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
-                    val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-                    val email = sharedPreferences.getString(EMAIL_KEY, "N/A")
+                    val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+                    val email = sharedPreferences.getString(MainActivity.EMAIL_KEY, "N/A")
 
                     if (auth.currentUser != null) {
                         val firebaseUser = auth.currentUser
@@ -111,11 +110,7 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         showLoading(true)
-        favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("product_id", product.id)
-            startActivity(intent)
-        }
+        favoriteAdapter = FavoriteAdapter(this, listOf())
         binding.recyclerViewFavorite.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
             adapter = favoriteAdapter

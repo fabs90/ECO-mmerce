@@ -20,21 +20,31 @@ import com.example.ecommerce.view.data.api.ProductsItem
 
 class FavoriteAdapter(
     private val context: Context,
-    private var favoriteList: List<ProductsItem>,
-    private val onItemClick: (ProductsItem) -> Unit
+    private var favoriteList: List<ProductsItem>
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(favorite: ProductsItem) {
-            binding.productName.text = favorite.name
+        val imageView: ImageView = binding.productImage
+        val nameTextView: TextView = binding.productName
+        val priceTextView: TextView = binding.productPrice
 
+        fun bind(favorite: ProductsItem) {
+            nameTextView.text = favorite.name
+            priceTextView.text = "Rp.${favorite.price}"
             Glide.with(context)
                 .load(favorite.image)
                 .error(R.drawable.ic_broken)
-                .into(binding.productImage)
+                .into(imageView)
 
             binding.root.setOnClickListener {
-                onItemClick(favorite)
+                val intent = Intent(context, DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
+                }
+                Log.d("FavoriteAdapter", "Navigating to detail with data: $favorite")
+                context.startActivity(
+                    intent,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
+                )
             }
         }
     }
