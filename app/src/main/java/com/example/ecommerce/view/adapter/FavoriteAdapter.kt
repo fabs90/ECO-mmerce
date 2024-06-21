@@ -26,11 +26,9 @@ class FavoriteAdapter(
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         val imageView: ImageView = binding.productImage
         val nameTextView: TextView = binding.productName
-        val priceTextView: TextView = binding.productPrice
 
         fun bind(favorite: ProductsItem) {
             nameTextView.text = favorite.name
-            priceTextView.text = "Rp.${favorite.price}"
             Glide.with(context)
                 .load(favorite.image)
                 .error(R.drawable.ic_broken)
