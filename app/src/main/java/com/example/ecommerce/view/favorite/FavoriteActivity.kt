@@ -96,10 +96,16 @@ class FavoriteActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.navigation_favorite -> false
-                else -> false
+                R.id.navigation_favorite -> {
+                    true
+                }
+                else -> {
+                    false
+                }
             }
         }
+        // Set selected item to navigation_favorite
+        navView.selectedItemId = R.id.navigation_favorite
     }
 
     private fun setupRecyclerView() {

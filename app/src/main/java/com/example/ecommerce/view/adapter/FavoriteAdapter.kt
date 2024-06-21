@@ -31,7 +31,6 @@ class FavoriteAdapter(
         fun bind(favorite: ProductsItem) {
             nameTextView.text = favorite.name
             priceTextView.text = "Rp.${favorite.price}"
-
             Glide.with(context)
                 .load(favorite.image)
                 .error(R.drawable.ic_broken)
