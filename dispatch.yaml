@@ -1,0 +1,3 @@
+dispatch:
+  - url: "eco-mmerce-cloud.et.r.appspot.com/recommend*"
+    service: python-service
