@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.ItemProductBinding
-import com.example.ecommerce.view.DetailActivity
+import com.example.ecommerce.view.detail.DetailActivity
 import com.example.ecommerce.view.data.api.ProductsItem
 
 class ProductAdapter(
@@ -43,7 +43,7 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
         holder.nameTextView.text = product.name
-        holder.priceTextView.text = product.price.toString()
+        holder.priceTextView.text = "Rp.${product.price.toString()}"
 
         Log.d("ProductAdapter", "Loading image: ${product.image}")
         Glide.with(context)

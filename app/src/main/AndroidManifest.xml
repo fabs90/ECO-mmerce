@@ -23,9 +23,12 @@
             android:name=".view.SearchResultActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".view.FavoriteActivity"
-            android:exported="false" />
+        <activity android:name=".view.favorite.FavoriteActivity"
+            android:exported="false"
+            />
+        <activity android:name=".view.RecommendActivity"
+            android:exported="false"
+            />
 
         <activity
             android:name=".view.RegisterActivity"
@@ -43,12 +46,10 @@
             android:name=".view.CartActivity"
             android:exported="false" />
 
-        <activity android:name=".view.DetailActivity" />
-
-        <activity android:name=".view.MainActivity"
-            android:exported="false"
-            />
-
+        <activity android:name=".view.detail.DetailActivity" />
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true"
