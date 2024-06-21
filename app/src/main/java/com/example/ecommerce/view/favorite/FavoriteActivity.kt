@@ -31,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class FavoriteActivity : AppCompatActivity() {
+
+
     private lateinit var auth: FirebaseAuth
     private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var binding: ActivityFavoriteBinding
@@ -49,7 +51,7 @@ class FavoriteActivity : AppCompatActivity() {
     }
 
     private fun isUserLoggedIn(): Boolean {
-        val sharedPreferences = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         val token = sharedPreferences.getString(MainActivity.TOKEN_KEY, null)
         auth = FirebaseAuth.getInstance()
         val firebaseUser = auth.currentUser
@@ -104,9 +106,13 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         showLoading(true)
-        favoriteAdapter = FavoriteAdapter(this, listOf())
+        favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_PRODUCT, product.id)
+            startActivity(intent)
+        }
         binding.recyclerViewFavorite.apply {
-            layoutManager = LinearLayoutManager(this@FavoriteActivity)
+            layoutManager = LinearLayoutManager(this@FavoriteActivity,)
             adapter = favoriteAdapter
         }
     }
