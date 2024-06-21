@@ -40,9 +40,22 @@ class SearchResultActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@SearchResultActivity, 2)
             adapter = productAdapter
         }
+        binding.searchView.setupWithSearchBar(binding.searchBar)
+        binding.searchView.editText.setOnEditorActionListener { textView, actionId, event ->
+            val query = binding.searchView.text.toString()
+            binding.searchBar.setText(query) // Update the search bar text
+            binding.searchView.hide()
+            if (query.isNotEmpty()) {
+                searchProducts(query)
+            } else {
+                Toast.makeText(this@SearchResultActivity, "Search query is empty", Toast.LENGTH_SHORT).show()
+            }
+            false
+        }
 
         val query = intent.getStringExtra("search_query")
         if (!query.isNullOrEmpty()) {
+            binding.searchBar.setText(query) // Update the search bar text
             searchProducts(query)
         }
     }

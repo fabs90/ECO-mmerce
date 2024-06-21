@@ -48,7 +48,7 @@ class RecommendActivity : AppCompatActivity() {
                 output_score = 0.04885903745889664,
                 product_name = "AW Bellies",
                 product_url = "http://www.flipkart.com/aw-bellies/p/itmeh4grgfbkexnt?pid=SHOEH4GRSUBJGZXE",
-                product_image = "http://www.flipkart.com/aw-bellies/p/itmeh4grgfbkexnt?pid=SHOEH4GRSUBJGZXE",
+                product_image = "http://img5a.flixcart.com/image/shoe/7/z/z/red-as-454-aw-11-original-imaeebfwsdf6jdf6.jpeg",
                 product_price = "Rp 100.000"
             )
         )
