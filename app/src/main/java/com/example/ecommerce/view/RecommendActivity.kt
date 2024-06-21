@@ -2,7 +2,9 @@ package com.example.ecommerce.view
 
 import android.os.Bundle
 import android.view.View
+
 import android.widget.Toast
+
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -50,13 +52,18 @@ class RecommendActivity : AppCompatActivity() {
             )
         )
 
+
         // Initializing Adapter with data
+
+        showLoading(false)
+
         adapter = RecommendationAdapter(recommendations)
         binding.gridProduct.adapter = adapter
 
         // Example of updating the recommendations
         getAllRecommendations()
     }
+
 
     private fun getAllRecommendations() {
         val call = ApiConfig.apiService().getRecommend()
@@ -83,3 +90,7 @@ class RecommendActivity : AppCompatActivity() {
     }
 
 }
+
+
+
+

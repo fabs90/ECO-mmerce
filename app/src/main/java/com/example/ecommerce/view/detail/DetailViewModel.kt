@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.ecommerce.data.FavoriteProduct
 import com.example.ecommerce.data.FavoriteProductDao
 import com.example.ecommerce.data.ProductDatabase
+import com.example.ecommerce.view.data.api.ProductsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,8 +21,17 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
 
+    private val _selectedProduct = MutableLiveData<ProductsItem>()
+    val selectedProduct: LiveData<ProductsItem>
+        get() = _selectedProduct
+
+
     init {
         productDao = productDb?.favoriteUserDao()
+    }
+
+    fun selectProduct(product: ProductsItem) {
+        _selectedProduct.value = product
     }
 
     fun addToFavorite(image: String, name: String, description: String) {
