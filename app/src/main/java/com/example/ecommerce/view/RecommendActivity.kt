@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
@@ -21,7 +22,7 @@ import retrofit2.Response
 class RecommendActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecommendBinding
-    private lateinit var adapter: RecommendationAdapter
+    private lateinit var recommendAdapter: RecommendationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +48,20 @@ class RecommendActivity : AppCompatActivity() {
                 product_url = "http://www.flipkart.com/aw-bellies/p/itmeh4grgfbkexnt?pid=SHOEH4GRSUBJGZXE",
             )
         )
-
-
         adapter = RecommendationAdapter(recommendations)
         binding.gridProduct.adapter = adapter
 
         // Example of updating the recommendations
 //        getAllRecommendations()
     }
+    private fun setupRecyclerView() {
+        showLoading(true)
+        binding.gridProduct.apply {
+            layoutManager = GridLayoutManager(this@RecommendActivity, 2)
+            adapter = adapter
+        }
+    }
+
 
 //    private fun getAllRecommendations() {
 //        val call = ApiConfig.apiService().getRecommend()
@@ -79,5 +86,4 @@ class RecommendActivity : AppCompatActivity() {
     private fun showLoading(status: Boolean) {
         binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
-
 }

@@ -24,26 +24,46 @@ class FavoriteAdapter(
     private val onItemClick: (ProductsItem) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    inner class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemFavoriteBinding.bind(view)
+    inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         val imageView: ImageView = binding.productImage
         val nameTextView: TextView = binding.productName
         val priceTextView: TextView = binding.productPrice
-        val heartButton: ImageButton = binding.heartButton
 
         init {
-            view.setOnClickListener {
+            binding.root.setOnClickListener {
                 onItemClick(favoriteList[adapterPosition])
+            }
+        }
+
+        fun bind(favorite: ProductsItem) {
+            nameTextView.text = favorite.name
+            priceTextView.text = "Rp.${favorite.price}"
+
+            Glide.with(context)
+                .load(favorite.image)
+                .error(R.drawable.ic_broken) // Add an error placeholder
+                .into(imageView)
+
+            binding.root.setOnClickListener {
+                val intent = Intent(context, DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
+                }
+                Log.e("FavoriteAdapter", "Navigating to detail with data: $favorite")
+                context.startActivity(
+                    intent,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
+                )
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_favorite, parent, false)
-        return FavoriteViewHolder(view)
+        val binding = ItemFavoriteBinding.inflate(LayoutInflater.from(context), parent, false)
+        return FavoriteViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+        holder.bind(favoriteList[position])
         val favorite = favoriteList[position]
         holder.nameTextView.text = favorite.name
         holder.priceTextView.text = "Rp.${favorite.price.toString()}"
@@ -62,13 +82,10 @@ class FavoriteAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return favoriteList.size
-    }
+    override fun getItemCount(): Int = favoriteList.size
 
     fun updateFavoriteList(newFavoriteList: List<ProductsItem>) {
         favoriteList = newFavoriteList
         notifyDataSetChanged()
     }
 }
-

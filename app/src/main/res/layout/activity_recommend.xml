@@ -46,7 +46,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/menu" />
+            app:menu="@menu/menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
