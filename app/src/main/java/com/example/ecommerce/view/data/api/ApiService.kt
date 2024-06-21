@@ -9,6 +9,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
     @POST("auth/login")
@@ -20,8 +21,8 @@ interface ApiService {
     @GET("products")
     fun getProducts(): Call<ProductsResponse>
 
-    @GET("recommend?input_ids=")
-    fun getRecommend(): Call<List<RecommendResponse>>
+    @GET("recommend")
+    fun getRecommend(@Query("input_ids") inputIds: String): Call<List<RecommendResponse>>
 }
 
 data class LoginRequest(
@@ -42,4 +43,8 @@ data class ProductsItem(
     val name: String,
     val description: String,
     val id: String
+)
+
+data class RecommendRequest(
+    val inputId : String
 )

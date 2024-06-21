@@ -58,10 +58,7 @@ class FavoriteAdapter(
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
             Log.e("favorite adapter","Your data : ${favorite}")
-            context.startActivity(
-                intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
-            )
+            context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
         }
     }
 

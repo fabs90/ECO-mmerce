@@ -7,6 +7,4 @@ data class RecommendResponse(
 	val output_score: Double,
 	val product_name: String,
 	val product_url: String,
-	val product_image: String,
-	val product_price: String
 )

@@ -45,8 +45,6 @@ class RecommendActivity : AppCompatActivity() {
                 output_score = 0.04885903745889664,
                 product_name = "AW Bellies",
                 product_url = "http://www.flipkart.com/aw-bellies/p/itmeh4grgfbkexnt?pid=SHOEH4GRSUBJGZXE",
-                product_image = "http://www.flipkart.com/aw-bellies/p/itmeh4grgfbkexnt?pid=SHOEH4GRSUBJGZXE",
-                product_price = "Rp 100.000"
             )
         )
 
@@ -55,28 +53,28 @@ class RecommendActivity : AppCompatActivity() {
         binding.gridProduct.adapter = adapter
 
         // Example of updating the recommendations
-        getAllRecommendations()
+//        getAllRecommendations()
     }
 
-    private fun getAllRecommendations() {
-        val call = ApiConfig.apiService().getRecommend()
-        call.enqueue(object : Callback<List<RecommendResponse>> {
-            override fun onResponse(call: Call<List<RecommendResponse>>, response: Response<List<RecommendResponse>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { recommendResponseList ->
-                        adapter.updateRecommendationList(recommendResponseList)
-                    }
-                } else {
-                    Toast.makeText(this@RecommendActivity, "Failed to load recommendations", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<RecommendResponse>>, t: Throwable) {
-                Toast.makeText(this@RecommendActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
+//    private fun getAllRecommendations() {
+//        val call = ApiConfig.apiService().getRecommend()
+//        call.enqueue(object : Callback<List<RecommendResponse>> {
+//            override fun onResponse(call: Call<List<RecommendResponse>>, response: Response<List<RecommendResponse>>) {
+//                if (response.isSuccessful) {
+//                    response.body()?.let { recommendResponseList ->
+//                        adapter.updateRecommendationList(recommendResponseList)
+//                    }
+//                } else {
+//                    Toast.makeText(this@RecommendActivity, "Failed to load recommendations", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<RecommendResponse>>, t: Throwable) {
+//                Toast.makeText(this@RecommendActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//    }
+//
 
     private fun showLoading(status: Boolean) {
         binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE

@@ -3,10 +3,7 @@ package com.example.ecommerce.view.adapter
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce.R
@@ -29,9 +26,10 @@ class RecommendationAdapter(
         val recommendation = recommendations[position]
         holder.binding.apply {
             productName.text = recommendation.product_name
-            productPrice.text = recommendation.product_price
+            // Assuming there's no price in recommendations
+            productPrice.text = null
             Glide.with(productImage.context)
-                .load(recommendation.product_image)
+                .load(recommendation.product_url)
                 .error(R.drawable.ic_broken) // Placeholder for error
                 .into(productImage)
         }
