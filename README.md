@@ -19,7 +19,7 @@
 
 ## Documentation
 <h3>UI/UX Workflow</h3>
-<img src="https://ibb.co.com/QXgc1zC" alt="UI/UX workflow">
+<img src="https://i.ibb.co.com/PtLYf39/ECO-mmerce-Flow-Screen-drawio-1.png" alt="UI/UX workflow">
 
 ## Credits
 
