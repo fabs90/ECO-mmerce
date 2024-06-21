@@ -64,6 +64,22 @@ class FavoriteAdapter(
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(favoriteList[position])
+        val favorite = favoriteList[position]
+        holder.nameTextView.text = favorite.name
+        holder.priceTextView.text = "Rp.${favorite.price.toString()}"
+
+        Log.d("FavoriteAdapter", "Loading image: ${favorite.image}")
+        Glide.with(context)
+            .load(favorite.image)
+            .error(R.drawable.ic_broken) // Add an error placeholder
+            .into(holder.imageView)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
+            Log.e("favorite adapter","Your data : ${favorite}")
+            context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
+        }
     }
 
     override fun getItemCount(): Int = favoriteList.size

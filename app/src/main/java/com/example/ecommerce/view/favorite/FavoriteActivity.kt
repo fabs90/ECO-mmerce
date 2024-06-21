@@ -111,7 +111,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
     private fun setupRecyclerView() {
-        showLoading(false)
+        showLoading(true)
         favoriteAdapter = FavoriteAdapter(this, listOf()) { product ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("product_id", product.id)
@@ -125,6 +125,7 @@ class FavoriteActivity : AppCompatActivity() {
 
 
     private fun setupViewModel() {
+        showLoading(false)
         viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
         viewModel.getFavoriteUser()?.observe(this, Observer { favoriteProducts ->
             favoriteProducts?.let {
