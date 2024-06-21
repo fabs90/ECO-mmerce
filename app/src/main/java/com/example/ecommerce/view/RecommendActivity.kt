@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
@@ -23,7 +24,7 @@ import retrofit2.Response
 class RecommendActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecommendBinding
-    private lateinit var adapter: RecommendationAdapter
+    private lateinit var recommendAdapter: RecommendationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,11 +58,12 @@ class RecommendActivity : AppCompatActivity() {
 
         showLoading(false)
 
-        adapter = RecommendationAdapter(recommendations)
-        binding.gridProduct.adapter = adapter
+        recommendAdapter = RecommendationAdapter(recommendations)
+        binding.gridProduct.adapter = recommendAdapter
 
         // Example of updating the recommendations
         getAllRecommendations()
+        setupRecyclerView()
     }
 
 
@@ -71,7 +73,7 @@ class RecommendActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<RecommendResponse>>, response: Response<List<RecommendResponse>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { recommendResponseList ->
-                        adapter.updateRecommendationList(recommendResponseList)
+                        recommendAdapter.updateRecommendationList(recommendResponseList)
                     }
                 } else {
                     Toast.makeText(this@RecommendActivity, "Failed to load recommendations", Toast.LENGTH_SHORT).show()
@@ -82,6 +84,13 @@ class RecommendActivity : AppCompatActivity() {
                 Toast.makeText(this@RecommendActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    private fun setupRecyclerView() {
+        showLoading(true)
+        binding.gridProduct.apply {
+            layoutManager = GridLayoutManager(this@RecommendActivity, 2)
+            adapter = adapter
+        }
     }
 
 
