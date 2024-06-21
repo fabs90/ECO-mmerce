@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ import com.example.ecommerce.view.adapter.ProductAdapter
 import com.example.ecommerce.view.data.api.ApiConfig
 import com.example.ecommerce.view.data.api.ProductsItem
 import com.example.ecommerce.view.data.response.ProductsResponse
+import com.example.ecommerce.view.detail.DetailActivity
+import com.example.ecommerce.view.favorite.FavoriteActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
@@ -52,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
@@ -193,4 +195,10 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 
+    // Agar focus bottom navbar tetap di home
+    override fun onResume() {
+        super.onResume()
+        val navView: BottomNavigationView = binding.bottomNavigation
+        navView.selectedItemId = R.id.navigation_home
+    }
 }
