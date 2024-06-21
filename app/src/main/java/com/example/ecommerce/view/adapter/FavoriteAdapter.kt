@@ -28,7 +28,7 @@ class FavoriteAdapter(
         private val binding = ItemFavoriteBinding.bind(view)
         val imageView: ImageView = binding.productImage
         val nameTextView: TextView = binding.productName
-        val priceTextView: TextView = binding.productPrice
+        //val priceTextView: TextView = binding.productPrice
         init {
             view.setOnClickListener {
                 onItemClick(favoriteList[adapterPosition])
@@ -37,9 +37,11 @@ class FavoriteAdapter(
 
         fun bind(favorite: ProductsItem) {
             nameTextView.text = favorite.name
-            priceTextView.text = "Rp.${favorite.price}"
+           // priceTextView.text = "Rp.${favorite.price}"
 
             Log.d("FavoriteAdapter", "Loading image: ${favorite.image}")
+
+
             Glide.with(context)
                 .load(favorite.image)
                 .error(R.drawable.ic_broken) // Add an error placeholder
