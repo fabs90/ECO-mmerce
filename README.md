@@ -10,7 +10,7 @@
 <h4 align="center">High eco friendly ecommerce. (Support the nature🍃)</h4>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
+  <a href="#key-featuress">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href=#documentation>Documentation</a>
   <a href="#emailware">Emailware</a> •
