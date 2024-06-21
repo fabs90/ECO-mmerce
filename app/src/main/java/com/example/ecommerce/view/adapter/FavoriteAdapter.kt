@@ -25,32 +25,17 @@ class FavoriteAdapter(
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
-        val imageView: ImageView = binding.productImage
-        val nameTextView: TextView = binding.productName
-
-        init {
-            binding.root.setOnClickListener {
-                onItemClick(favoriteList[adapterPosition])
-            }
-        }
-
         fun bind(favorite: ProductsItem) {
-            nameTextView.text = favorite.name
+            binding.productName.text = favorite.name
+            binding.productPrice.text = "Rp.${favorite.price}"
 
             Glide.with(context)
                 .load(favorite.image)
-                .error(R.drawable.ic_broken) // Add an error placeholder
-                .into(imageView)
+                .error(R.drawable.ic_broken)
+                .into(binding.productImage)
 
             binding.root.setOnClickListener {
-                val intent = Intent(context, DetailActivity::class.java).apply {
-                    putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
-                }
-                Log.e("FavoriteAdapter", "Navigating to detail with data: $favorite")
-                context.startActivity(
-                    intent,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle()
-                )
+                onItemClick(favorite)
             }
         }
     }
@@ -62,21 +47,6 @@ class FavoriteAdapter(
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(favoriteList[position])
-        val favorite = favoriteList[position]
-        holder.nameTextView.text = favorite.name
-
-        Log.d("FavoriteAdapter", "Loading image: ${favorite.image}")
-        Glide.with(context)
-            .load(favorite.image)
-            .error(R.drawable.ic_broken) // Add an error placeholder
-            .into(holder.imageView)
-
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_PRODUCT, favorite.id)
-            Log.e("favorite adapter","Your data : ${favorite}")
-            context.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity).toBundle())
-        }
     }
 
     override fun getItemCount(): Int = favoriteList.size
