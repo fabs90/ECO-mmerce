@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -29,12 +31,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -57,10 +59,13 @@ dependencies {
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 
     implementation ("com.google.android.material:material:1.3.0")
     implementation ("com.squareup.retrofit2:retrofit:2.8.1")
@@ -78,16 +83,4 @@ dependencies {
     implementation ("org.tensorflow:tensorflow-lite-metadata:0.3.1")
 
 
-
 }
-
-    //implementation(libs.play.services.auth)
-    //implementation(libs.material.v160)
-    //implementation(libs.circleimageview)
-    //implementation(libs.androidx.credentials)
-    //implementation(libs.androidx.credentials.play.services.auth)
-    //implementation(libs.googleid)
-    // Hapus dependensi yang dikomentari jika tidak diperlukan
-    // implementation("com.etebarian:meow-bottom-navigation:1.3.1")
-//}
-

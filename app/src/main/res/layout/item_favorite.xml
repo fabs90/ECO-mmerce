@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:padding="4dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/product_card"
-        android:layout_width="347dp"
+        android:layout_width="match_parent"
         android:layout_height="123dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="41dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp">
+            android:padding="12dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/product_image"
@@ -28,43 +29,21 @@
                 android:contentDescription="Product Image"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_example"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner"/>
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.ImageView.RoundedCorner" />
 
             <TextView
                 android:id="@+id/product_name"
-                android:layout_width="158dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/product_price"
-                android:layout_marginStart="9dp"
-                android:layout_marginBottom="7dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_toEndOf="@id/product_image"
                 android:text="Tote Bag"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_price"
-                android:layout_width="156dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/product_image"
-                android:text="Rp 100.000"
-                android:textColor="@color/green_main"
-                android:textSize="18sp" />
-
-            <ImageButton
-                android:id="@+id/heart_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="14dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Favorite"
-                android:src="@drawable/ic_favorite" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
